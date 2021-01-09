@@ -28,6 +28,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-transition-group": "^4.4.1",
+    "rsuite": "^4.8.6",
+    "rsuite-table": "^3.14.2",
     "shards-react": "^1.0.3",
     "web-vitals": "^0.2.4"
   },
