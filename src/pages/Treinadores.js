@@ -1,30 +1,15 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Table } from "rsuite";
-import { IconButton } from "rsuite";
-import { Icon } from "rsuite";
+
 import { Layout } from "antd";
 import TopBar from "./components/TopBar";
 import NavBar from "./components/NavBar";
 import background from "./components/images/background-login.jpg";
 import Axios from "axios";
+import "rsuite/lib/styles/index.less";
 const { Header, Sider, Content } = Layout; //antd
 const { Column, HeaderCell, Cell } = Table; //rsuite
-
-const ActionCell = ({ rowData, dataKey, ...props }) => {
-  function handleAction() {
-    alert(`id:${rowData[dataKey]}`);
-  }
-  return (
-    <Cell {...props} className="link-group">
-      <IconButton
-        appearance="subtle"
-        onClick={handleAction}
-        icon={<Icon icon="edit2" />}
-      />
-    </Cell>
-  );
-};
 
 function Treinadores() {
   const [AtletaList, setAtletaList] = useState([]);
@@ -80,43 +65,50 @@ function Treinadores() {
             }}
           >
             <div>
-              <Table data={AtletaList} height={400}>
-                <Column width={100} align="center" fixed resizable>
-                  <HeaderCell>ID</HeaderCell>
+              <Table
+                height={400}
+                data={AtletaList}
+                onRowClick={(data) => {
+                  console.log(data);
+                }}
+              >
+                <Column width={70} align="center" fixed>
+                  <HeaderCell>Id</HeaderCell>
                   <Cell dataKey="id" />
                 </Column>
-                <Column width={150} align="center" fixed resizable>
+
+                <Column width={200} fixed>
                   <HeaderCell>First Name</HeaderCell>
                   <Cell dataKey="firstName" />
                 </Column>
-                <Column width={150} align="center" fixed resizable>
+
+                <Column width={200}>
                   <HeaderCell>Last Name</HeaderCell>
                   <Cell dataKey="lastName" />
                 </Column>
-                <Column width={200} align="center" sortable fixed resizable>
+
+                <Column width={200}>
                   <HeaderCell>City</HeaderCell>
                   <Cell dataKey="city" />
                 </Column>
-                <Column
-                  width={300}
-                  align="center"
-                  sortable={true}
-                  fixed
-                  resizable
-                >
+
+                <Column width={200}>
                   <HeaderCell>Street</HeaderCell>
                   <Cell dataKey="street" />
                 </Column>
-                <Column width={300} align="center" fixed resizable>
+
+                <Column width={300}>
                   <HeaderCell>Company Name</HeaderCell>
                   <Cell dataKey="companyName" />
                 </Column>
-                <Column width={200} align="center" fixed resizable>
+
+                <Column width={300}>
                   <HeaderCell>Email</HeaderCell>
                   <Cell dataKey="email" />
                 </Column>
                 <Column width={120} fixed="right">
                   <HeaderCell>Action</HeaderCell>
+
                   <Cell>
                     {(rowData) => {
                       function handleAction() {
@@ -124,14 +116,12 @@ function Treinadores() {
                       }
                       return (
                         <span>
-                          <a onClick={handleAction}>
-                            {" "}
-                            <b>Edit</b>{" "}
-                          </a>{" "}
+                          <a href="/home" onClick={handleAction}>
+                            Edit
+                          </a>
                           |
-                          <a onClick={handleAction}>
-                            {" "}
-                            <b>Remove</b>{" "}
+                          <a href="/home" onClick={handleAction}>
+                            Remove
                           </a>
                         </span>
                       );
