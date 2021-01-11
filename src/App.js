@@ -14,7 +14,13 @@ import { UserOutlined } from "@ant-design/icons";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import background from "./pages/components/images/background-login.jpg";
 import Home from "./pages/Home";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import Atletas from "./pages/Atletas";
 import Treinadores from "./pages/Treinadores";
 import Eventos from "./pages/Eventos";
@@ -46,6 +52,11 @@ export default function App() {
   const [loginStatus, setLoginStatus] = useState(false);
   const [isAuth, setisAuth] = useState(false);
   Axios.defaults.withCredentials = true;
+
+  if (localStorage.getItem("token") !== null) {
+    console.log("Autenticado");
+    setisAuth(true);
+  }
 
   const login = () => {
     if (password.length <= 1) {
@@ -95,84 +106,86 @@ export default function App() {
               direction: "column",
             }}
           >
-            <>
-              <div>
-                <Alert
-                  variant="danger"
-                  onClose={() => setAlert(false)}
-                  dismissible
-                  show={alert}
-                >
-                  <Alert.Heading>{loginStatus}</Alert.Heading>
-                </Alert>
-              </div>
-              <div
-                className="login"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "100vh",
-                  padding: "0px",
-                  margin: "auto",
-                  width: "50%",
-                  backgroundColor: "rgba(255,255,255, 0.9)",
-                }}
-              >
-                <Container
+            {isAuth ? (
+              <Redirect path="/home" />
+            ) : (
+              <>
+                <div>
+                  <Alert
+                    variant="danger"
+                    onClose={() => setAlert(false)}
+                    dismissible
+                    show={alert}
+                  >
+                    <Alert.Heading>{loginStatus}</Alert.Heading>
+                  </Alert>
+                </div>
+                <div
+                  className="login"
                   style={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    height: "100vh",
+                    padding: "0px",
+                    margin: "auto",
+                    width: "50%",
+                    backgroundColor: "rgba(255,255,255, 0.9)",
                   }}
                 >
-                  <Row>
-                    <Col>
-                      <Image
-                        src={logo}
-                        roundedCircle
-                        style={{
-                          padding: "20px",
-                        }}
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="login">
-                      <Form
-                        {...layout}
-                        name="basic"
-                        initialValues={{
-                          remember: true,
-                        }}
-                        className="login"
-                        style={{
-                          paddingTop: "30%",
-                        }}
-                      >
-                        <Form.Item
-                          prefix={<UserOutlined />}
-                          label="Username "
-                          name="username"
+                  <Container
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Row>
+                      <Col>
+                        <Image
+                          src={logo}
+                          roundedCircle
+                          style={{
+                            padding: "20px",
+                          }}
+                        />
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="login">
+                        <Form
+                          {...layout}
+                          name="basic"
+                          initialValues={{
+                            remember: true,
+                          }}
+                          className="login"
+                          style={{
+                            paddingTop: "30%",
+                          }}
                         >
-                          <Input
-                            onChange={(e) => {
-                              setUsername(e.target.value);
-                            }}
-                          />
-                        </Form.Item>
+                          <Form.Item
+                            prefix={<UserOutlined />}
+                            label="Username "
+                            name="username"
+                          >
+                            <Input
+                              onChange={(e) => {
+                                setUsername(e.target.value);
+                              }}
+                            />
+                          </Form.Item>
 
-                        <Form.Item label="Password" name="password">
-                          <Input
-                            type="password"
-                            onChange={(e) => {
-                              setPassword(e.target.value);
-                            }}
-                          />
-                        </Form.Item>
+                          <Form.Item label="Password" name="password">
+                            <Input
+                              type="password"
+                              onChange={(e) => {
+                                setPassword(e.target.value);
+                              }}
+                            />
+                          </Form.Item>
 
-                        <Form.Item {...tailLayout}>
-                          <Link to="/home" onClick={login} isAuth={isAuth}>
+                          <Form.Item {...tailLayout}>
                             <Button
                               type="primary"
                               htmlType="submit"
@@ -180,17 +193,20 @@ export default function App() {
                                 backgroundColor: "#001145",
                                 borderColor: "#001145",
                               }}
+                              onClick={login}
                             >
-                              Login
+                              <Link to="/home" isAuth={isAuth}>
+                                Login
+                              </Link>
                             </Button>
-                          </Link>
-                        </Form.Item>
-                      </Form>
-                    </Col>
-                  </Row>
-                </Container>
-              </div>
-            </>
+                          </Form.Item>
+                        </Form>
+                      </Col>
+                    </Row>
+                  </Container>
+                </div>
+              </>
+            )}
           </div>
         </Route>
         <Route path="/atletas">
