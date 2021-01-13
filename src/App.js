@@ -53,6 +53,36 @@ export default function App() {
   const [isAuth, setisAuth] = useState(false);
   Axios.defaults.withCredentials = true;
 
+  const login = () => {
+    if (password.length <= 1) {
+      setLoginStatus("Campos Vazios!");
+      setAlert(true);
+    }
+    if (username.length <= 1) {
+      setLoginStatus("Campos Vazios!");
+      setAlert(true);
+    } else {
+      Axios.post(
+        `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/login`,
+        {
+          //Axios.post(`http://localhost:5050/login`, {
+          username: username,
+          password: password,
+        }
+      ).then((response) => {
+        if (!response.data.auth) {
+          setLoginStatus(response.data.message);
+          setAlert(true);
+        } else {
+          console.log(response.data.message);
+          localStorage.setItem("token", response.data.token);
+          setLoginStatus(true);
+          setisAuth(true);
+        }
+      });
+    }
+  };
+
   if (localStorage.getItem("token") !== null) {
     Axios.get(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/isUserAuth`,
@@ -145,36 +175,6 @@ export default function App() {
         );
       } else {
         setisAuth(false);
-
-        const login = () => {
-          if (password.length <= 1) {
-            setLoginStatus("Campos Vazios!");
-            setAlert(true);
-          }
-          if (username.length <= 1) {
-            setLoginStatus("Campos Vazios!");
-            setAlert(true);
-          } else {
-            Axios.post(
-              `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/login`,
-              {
-                //Axios.post(`http://localhost:5050/login`, {
-                username: username,
-                password: password,
-              }
-            ).then((response) => {
-              if (!response.data.auth) {
-                setLoginStatus(response.data.message);
-                setAlert(true);
-              } else {
-                console.log(response.data.message);
-                localStorage.setItem("token", response.data.token);
-                setLoginStatus(true);
-                setisAuth(true);
-              }
-            });
-          }
-        };
 
         return (
           <Router>
