@@ -14,13 +14,7 @@ import { UserOutlined } from "@ant-design/icons";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import background from "./pages/components/images/background-login.jpg";
 import Home from "./pages/Home";
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Atletas from "./pages/Atletas";
 import Treinadores from "./pages/Treinadores";
 import Eventos from "./pages/Eventos";
