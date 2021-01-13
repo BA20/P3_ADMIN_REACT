@@ -1,3 +1,4 @@
+@@ -0,0 +1,253 @@
 import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
@@ -77,274 +78,177 @@ export default function App() {
     }
   };
 
-  if (localStorage.getItem("token") !== null) {
-    Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/isUserAuth`,
-      {
-        headers: {
-          "x-access-token": localStorage.getItem("token"),
-        },
-      }
-    ).then((res) => {
-      console.log(res);
-      if (res.data.auth === true) {
-        setisAuth(true);
-        return (
-          <Router>
-            <Switch>
-              <Route path="/home" exact>
-                <div
-                  className="App"
+  return (
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          <div
+            className="App"
+            style={{
+              backgroundImage: `url(${background})`,
+              backgroundColor: "#007BFF",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              height: "100vh",
+              margin: "auto",
+              display: "flex",
+              direction: "column",
+            }}
+          >
+            <>
+              <div>
+                <Alert
+                  variant="danger"
+                  onClose={() => setAlert(false)}
+                  dismissible
+                  show={alert}
+                >
+                  <Alert.Heading>{loginStatus}</Alert.Heading>
+                </Alert>
+              </div>
+              <div
+                className="login"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100vh",
+                  padding: "0px",
+                  margin: "auto",
+                  width: "50%",
+                  backgroundColor: "rgba(255,255,255, 0.9)",
+                }}
+              >
+                <Container
                   style={{
-                    backgroundImage: `url(${background})`,
-                    backgroundColor: "#007BFF",
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    height: "100vh",
-                    margin: "auto",
                     display: "flex",
-                    direction: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
-                  <Home></Home>
-                </div>
-              </Route>
-              <Route path="/atletas">
-                <Atletas />
-              </Route>
-              <Route path="/treinadores">
-                <Treinadores />
-              </Route>
-              <Route path="/eventos">
-                <Eventos />
-              </Route>
-              <Route path="/avaliacao">
-                <Avaliacao />
-              </Route>
-              <Route path="/exercicios">
-                <Exercicios />
-              </Route>
-              <Route path="/outros">
-                <Outros />
-              </Route>
-            </Switch>
-
-            <ProtectedRoute
-              path="/home"
-              component={Home}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/atletas"
-              component={Atletas}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/treinadores"
-              component={Treinadores}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/eventos"
-              component={Eventos}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/avaliacao"
-              component={Avaliacao}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/exercicios"
-              component={Exercicios}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/outros"
-              component={Outros}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-          </Router>
-        );
-      } else {
-        setisAuth(false);
-
-        return (
-          <Router>
-            <Switch>
-              <Route path="/" exact>
-                <div
-                  className="App"
-                  style={{
-                    backgroundImage: `url(${background})`,
-                    backgroundColor: "#007BFF",
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    height: "100vh",
-                    margin: "auto",
-                    display: "flex",
-                    direction: "column",
-                  }}
-                >
-                  <>
-                    <div>
-                      <Alert
-                        variant="danger"
-                        onClose={() => setAlert(false)}
-                        dismissible
-                        show={alert}
-                      >
-                        <Alert.Heading>{loginStatus}</Alert.Heading>
-                      </Alert>
-                    </div>
-                    <div
-                      className="login"
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: "100vh",
-                        padding: "0px",
-                        margin: "auto",
-                        width: "50%",
-                        backgroundColor: "rgba(255,255,255, 0.9)",
-                      }}
-                    >
-                      <Container
+                  <Row>
+                    <Col>
+                      <Image
+                        src={logo}
+                        roundedCircle
                         style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
+                          padding: "20px",
+                        }}
+                      />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col className="login">
+                      <Form
+                        {...layout}
+                        name="basic"
+                        initialValues={{
+                          remember: true,
+                        }}
+                        className="login"
+                        style={{
+                          paddingTop: "30%",
                         }}
                       >
-                        <Row>
-                          <Col>
-                            <Image
-                              src={logo}
-                              roundedCircle
+                        <Form.Item
+                          prefix={<UserOutlined />}
+                          label="Username "
+                          name="username"
+                        >
+                          <Input
+                            onChange={(e) => {
+                              setUsername(e.target.value);
+                            }}
+                          />
+                        </Form.Item>
+
+                        <Form.Item label="Password" name="password">
+                          <Input
+                            type="password"
+                            onChange={(e) => {
+                              setPassword(e.target.value);
+                            }}
+                          />
+                        </Form.Item>
+
+                        <Form.Item {...tailLayout}>
+                          <Link to="/home" onClick={login} isAuth={isAuth}>
+                            <Button
+                              type="primary"
+                              htmlType="submit"
                               style={{
-                                padding: "20px",
-                              }}
-                            />
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col className="login">
-                            <Form
-                              {...layout}
-                              name="basic"
-                              initialValues={{
-                                remember: true,
-                              }}
-                              className="login"
-                              style={{
-                                paddingTop: "30%",
+                                backgroundColor: "#001145",
+                                borderColor: "#001145",
                               }}
                             >
-                              <Form.Item
-                                prefix={<UserOutlined />}
-                                label="Username "
-                                name="username"
-                              >
-                                <Input
-                                  onChange={(e) => {
-                                    setUsername(e.target.value);
-                                  }}
-                                />
-                              </Form.Item>
+                              Login
+                            </Button>
+                          </Link>
+                        </Form.Item>
+                      </Form>
+                    </Col>
+                  </Row>
+                </Container>
+              </div>
+            </>
+          </div>
+        </Route>
+        <Route path="/atletas">
+          <Atletas />
+        </Route>
+        <Route path="/treinadores">
+          <Treinadores />
+        </Route>
+        <Route path="/eventos">
+          <Eventos />
+        </Route>
+        <Route path="/avaliacao">
+          <Avaliacao />
+        </Route>
+        <Route path="/exercicios">
+          <Exercicios />
+        </Route>
+        <Route path="/outros">
+          <Outros />
+        </Route>
+      </Switch>
 
-                              <Form.Item label="Password" name="password">
-                                <Input
-                                  type="password"
-                                  onChange={(e) => {
-                                    setPassword(e.target.value);
-                                  }}
-                                />
-                              </Form.Item>
-
-                              <Form.Item {...tailLayout}>
-                                <Button
-                                  type="primary"
-                                  htmlType="submit"
-                                  style={{
-                                    backgroundColor: "#001145",
-                                    borderColor: "#001145",
-                                  }}
-                                  onClick={login}
-                                >
-                                  <Link to="/home" isAuth={isAuth}>
-                                    Login
-                                  </Link>
-                                </Button>
-                              </Form.Item>
-                            </Form>
-                          </Col>
-                        </Row>
-                      </Container>
-                    </div>
-                  </>
-                </div>
-              </Route>
-              <Route path="/atletas">
-                <Atletas />
-              </Route>
-              <Route path="/treinadores">
-                <Treinadores />
-              </Route>
-              <Route path="/eventos">
-                <Eventos />
-              </Route>
-              <Route path="/avaliacao">
-                <Avaliacao />
-              </Route>
-              <Route path="/exercicios">
-                <Exercicios />
-              </Route>
-              <Route path="/outros">
-                <Outros />
-              </Route>
-            </Switch>
-
-            <ProtectedRoute
-              path="/home"
-              component={Home}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/atletas"
-              component={Atletas}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/treinadores"
-              component={Treinadores}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/eventos"
-              component={Eventos}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/avaliacao"
-              component={Avaliacao}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/exercicios"
-              component={Exercicios}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/outros"
-              component={Outros}
-              isAuth={isAuth}
-            ></ProtectedRoute>
-          </Router>
-        );
-      }
-    });
-  }
+      <ProtectedRoute
+        path="/home"
+        component={Home}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/atletas"
+        component={Atletas}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/treinadores"
+        component={Treinadores}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/eventos"
+        component={Eventos}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/avaliacao"
+        component={Avaliacao}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/exercicios"
+        component={Exercicios}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/outros"
+        component={Outros}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+    </Router>
+  );
 }
