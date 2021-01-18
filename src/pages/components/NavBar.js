@@ -26,23 +26,26 @@ function NavBar() {
     >
       <SubMenu key="sub1" icon={<ControlOutlined />} title="Admin">
         <Menu.Item key="1" icon={<UserOutlined />}>
+          <Link to="/users">users</Link>
+        </Menu.Item>
+        <Menu.Item key="2" icon={<UserOutlined />}>
           <Link to="/atletas">Atletas</Link>
         </Menu.Item>
 
-        <Menu.Item key="2" icon={<TeamOutlined />}>
+        <Menu.Item key="3" icon={<TeamOutlined />}>
           <Link to="/treinadores">Treinadores</Link>
         </Menu.Item>
-        <Menu.Item key="3" icon={<CalendarOutlined />}>
+        <Menu.Item key="4" icon={<CalendarOutlined />}>
           <Link to="/eventos"> Eventos</Link>
         </Menu.Item>
 
-        <Menu.Item key="4" icon={<StockOutlined />}>
+        <Menu.Item key="5" icon={<StockOutlined />}>
           <Link to="/avaliacao">Avaliação</Link>
         </Menu.Item>
-        <Menu.Item key="5" icon={<BarsOutlined />}>
+        <Menu.Item key="6" icon={<BarsOutlined />}>
           <Link to="/exercicios">Exercícios</Link>
         </Menu.Item>
-        <Menu.Item key="6" icon={<PlusCircleOutlined />} title="Outros">
+        <Menu.Item key="7" icon={<PlusCircleOutlined />} title="Outros">
           <Link to="/outros">Outros</Link>
         </Menu.Item>
       </SubMenu>

@@ -1,4 +1,3 @@
-@@ -0,0 +1,253 @@
 import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
@@ -22,6 +21,7 @@ import Eventos from "./pages/Eventos";
 import Avaliacao from "./pages/Avaliacao";
 import Exercicios from "./pages/Exercicios";
 import Outros from "./pages/Outros";
+import Users from "./pages/Users";
 require("dotenv").config();
 
 const layout = {
@@ -194,6 +194,9 @@ export default function App() {
             </>
           </div>
         </Route>
+        <Route path="/user">
+          <Users />
+        </Route>
         <Route path="/atletas">
           <Atletas />
         </Route>
@@ -217,6 +220,11 @@ export default function App() {
       <ProtectedRoute
         path="/home"
         component={Home}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/users"
+        component={Users}
         isAuth={isAuth}
       ></ProtectedRoute>
       <ProtectedRoute
