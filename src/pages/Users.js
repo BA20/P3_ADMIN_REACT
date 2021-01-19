@@ -1,35 +1,24 @@
-import * as React from "react";
-import useState from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Layout } from "antd";
 import TopBar from "./components/TopBar";
 import NavBar from "./components/NavBar";
 import background from "./components/images/background-login.jpg";
 import Axios from "axios";
+import { Table, Space } from "antd";
+const { Column, ColumnGroup } = Table;
 
-import { DataGrid } from "@material-ui/data-grid";
 //  import jwt from "jwt-decode";
 const { Header, Sider, Content } = Layout;
 
-const data = () => {
+function Users() {
+  const [UserList, setUserList] = useState([]);
+
   Axios.get(
     `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/users`
   ).then((response) => {
-    console.log(response.data);
+    setUserList(response.data);
   });
-};
-
-function Users() {
-  // const [UsersList, setUsersList] = useState([]);
-
-  const columns = [
-    { field: "idUser", headerName: "ID", width: 70 },
-    { field: "Name", headerName: "Nome", width: 130 },
-    { field: "Email", headerName: "Email", width: 130 },
-    { field: "PhoneNumber", headerName: "Nº Tlm", width: 130 },
-    { field: "Tipo", headerName: "Tipo", width: 130 },
-  ];
-
   return (
     <div
       className="App"
@@ -80,7 +69,39 @@ function Users() {
                 width: "100%",
               }}
             >
-              <DataGrid rows={data} columns={columns} pageSize={10} />
+              <Table dataSource={UserList}>
+                <ColumnGroup
+                  title="idUser"
+                  dataIndex="idUser"
+                  key="idUser"
+                ></ColumnGroup>
+                <ColumnGroup
+                  title="Nome"
+                  dataIndex="Name"
+                  key="Name"
+                ></ColumnGroup>
+                <ColumnGroup
+                  title="Email"
+                  dataIndex="Email"
+                  key="Email"
+                ></ColumnGroup>
+                <ColumnGroup
+                  title="Telemóvel"
+                  dataIndex="PhoneNumber"
+                  key="PhoneNumber"
+                ></ColumnGroup>
+
+                <Column
+                  title="Action"
+                  key="action"
+                  render={(text, record) => (
+                    <Space size="middle">
+                      <a href="/">Editar </a>
+                      <a href="/">Eliminar</a>
+                    </Space>
+                  )}
+                />
+              </Table>
             </div>
           </Content>
         </Layout>
