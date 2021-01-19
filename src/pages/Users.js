@@ -5,7 +5,8 @@ import TopBar from "./components/TopBar";
 import NavBar from "./components/NavBar";
 import background from "./components/images/background-login.jpg";
 import Axios from "axios";
-import { Table, Space } from "antd";
+
+import { Table, Space, Button } from "antd";
 const { Column, ColumnGroup } = Table;
 
 //  import jwt from "jwt-decode";
@@ -14,6 +15,18 @@ const { Header, Sider, Content } = Layout;
 function Users() {
   const [UserList, setUserList] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
+
+  const deleteUser = (id) => {
+    Axios.post(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteUser`,
+      {
+        id: id,
+      }
+    ).then((response) => {
+      console.log(response);
+      setResponseStatus(`Eliminado o User ${id}`);
+    });
+  };
   useEffect(() => {
     Axios.get(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/userspais`
@@ -21,15 +34,6 @@ function Users() {
       setUserList(response.data);
     });
   }, [ResponseStatus]);
-  const deleteUser = (id) => {
-    Axios.delete(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteUser/${id}`
-    ).then((response) => {
-      console.log(response);
-      setResponseStatus(`Eliminado o User ${id}`);
-    });
-  };
-
   return (
     <div
       className="App"
@@ -108,13 +112,13 @@ function Users() {
                   render={(text, record) => (
                     <Space size="middle">
                       <a>Editar </a>
-                      <a
+                      <Button
                         onClick={() => {
                           deleteUser(record.idUser);
                         }}
                       >
                         Eliminar
-                      </a>
+                      </Button>
                     </Space>
                   )}
                 />
