@@ -1,24 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { Layout } from "antd";
 import TopBar from "./components/TopBar";
 import NavBar from "./components/NavBar";
 import background from "./components/images/background-login.jpg";
 import Axios from "axios";
-import { Table, Space } from "antd";
+import { Table, Space, Tag } from "antd";
 const { Column, ColumnGroup } = Table;
 
 //  import jwt from "jwt-decode";
 const { Header, Sider, Content } = Layout;
+const deleteUser = (id) => {
+  Axios.delete(
+    `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteUser/${id}`
+  ).then((response) => {
+    console.log(response);
+  });
+};
 
 function Users() {
   const [UserList, setUserList] = useState([]);
+  const [ResponseStatus, setResponseStatus] = useState();
 
-  Axios.get(
-    `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/users`
-  ).then((response) => {
-    setUserList(response.data);
-  });
+  useEffect(() => {
+    Axios.get(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/userspais`
+    ).then((response) => {
+      setUserList(response.data);
+    });
+  }, []);
+
   return (
     <div
       className="App"
@@ -96,8 +107,14 @@ function Users() {
                   key="action"
                   render={(text, record) => (
                     <Space size="middle">
-                      <a href="/">Editar </a>
-                      <a href="/">Eliminar</a>
+                      <a>Editar </a>
+                      <a
+                        onClick={() => {
+                          deleteUser(record.idUser);
+                        }}
+                      >
+                        Eliminar
+                      </a>
                     </Space>
                   )}
                 />
