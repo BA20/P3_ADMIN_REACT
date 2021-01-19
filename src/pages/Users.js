@@ -5,30 +5,30 @@ import TopBar from "./components/TopBar";
 import NavBar from "./components/NavBar";
 import background from "./components/images/background-login.jpg";
 import Axios from "axios";
-import { Table, Space, Tag } from "antd";
+import { Table, Space } from "antd";
 const { Column, ColumnGroup } = Table;
 
 //  import jwt from "jwt-decode";
 const { Header, Sider, Content } = Layout;
-const deleteUser = (id) => {
-  Axios.delete(
-    `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteUser/${id}`
-  ).then((response) => {
-    console.log(response);
-  });
-};
 
 function Users() {
   const [UserList, setUserList] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
-
   useEffect(() => {
     Axios.get(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/userspais`
     ).then((response) => {
       setUserList(response.data);
     });
-  }, []);
+  }, [ResponseStatus]);
+  const deleteUser = (id) => {
+    Axios.delete(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteUser/${id}`
+    ).then((response) => {
+      console.log(response);
+      setResponseStatus(`Eliminado o User ${id}`);
+    });
+  };
 
   return (
     <div
@@ -119,6 +119,7 @@ function Users() {
                   )}
                 />
               </Table>
+              <h1>{ResponseStatus}</h1>
             </div>
           </Content>
         </Layout>
