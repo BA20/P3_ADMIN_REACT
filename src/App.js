@@ -22,6 +22,7 @@ import Avaliacao from "./pages/Avaliacao";
 import Exercicios from "./pages/Exercicios";
 import Outros from "./pages/Outros";
 import Users from "./pages/Users";
+import UsersCreate from "./pages/usersCreate";
 require("dotenv").config();
 
 const layout = {
@@ -203,6 +204,9 @@ export default function App() {
         <Route path="/user">
           <Users />
         </Route>
+        <Route path="/userCreate">
+          <usersCreate />
+        </Route>
         <Route path="/atletas">
           <Atletas />
         </Route>
@@ -231,6 +235,11 @@ export default function App() {
       <ProtectedRoute
         path="/users"
         component={Users}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/usersCreate"
+        component={UsersCreate}
         isAuth={isAuth}
       ></ProtectedRoute>
       <ProtectedRoute

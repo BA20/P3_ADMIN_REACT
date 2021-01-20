@@ -26,7 +26,7 @@ function NavBar() {
     >
       <SubMenu key="sub1" icon={<ControlOutlined />} title="Admin">
         <Menu.Item key="1" icon={<UserOutlined />}>
-          <Link to="/users">users</Link>
+          <Link to="/users">Pais</Link>
         </Menu.Item>
         <Menu.Item key="2" icon={<UserOutlined />}>
           <Link to="/atletas">Atletas</Link>

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
+
 import { Layout } from "antd";
 import TopBar from "./components/TopBar";
 import NavBar from "./components/NavBar";
 import background from "./components/images/background-login.jpg";
 import Axios from "axios";
-
+import { PlusCircleOutlined } from "@ant-design/icons";
 import { Table, Space, Button } from "antd";
+
 const { Column, ColumnGroup } = Table;
 
 //  import jwt from "jwt-decode";
@@ -135,6 +137,14 @@ function Users() {
                   )}
                 />
               </Table>
+              <Link to="/usersCreate">
+                <Button
+                  type="primary"
+                  shape="circle"
+                  icon={<PlusCircleOutlined />}
+                  size={"large"}
+                />
+              </Link>
               <h1>{ResponseStatus}</h1>
             </div>
           </Content>
