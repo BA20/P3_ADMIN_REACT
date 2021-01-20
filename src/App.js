@@ -97,16 +97,7 @@ export default function App() {
             }}
           >
             <>
-              <div>
-                <Alert
-                  variant="danger"
-                  onClose={() => setAlert(false)}
-                  dismissible
-                  show={alert}
-                >
-                  <Alert.Heading>{loginStatus}</Alert.Heading>
-                </Alert>
-              </div>
+              <div></div>
               <div
                 className="login"
                 style={{
@@ -188,6 +179,21 @@ export default function App() {
                         </Form.Item>
                       </Form>
                     </Col>
+                  </Row>
+                  <Row
+                    style={{
+                      display: "-ms-flexbox",
+                      paddingBlockEnd: "0px",
+                    }}
+                  >
+                    <Alert
+                      variant="danger"
+                      onClose={() => setAlert(false)}
+                      dismissible
+                      show={alert}
+                    >
+                      <Alert.Heading>{loginStatus}</Alert.Heading>
+                    </Alert>
                   </Row>
                 </Container>
               </div>

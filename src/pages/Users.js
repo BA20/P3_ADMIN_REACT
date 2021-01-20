@@ -16,6 +16,18 @@ function Users() {
   const [UserList, setUserList] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
 
+  const updateUser = (id) => {
+    Axios.put(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/`,
+      {
+        id: id,
+      }
+    ).then((response) => {
+      console.log(response);
+      setResponseStatus(`Editado o User ${id}`);
+    });
+  };
+
   const deleteUser = (id) => {
     Axios.post(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteUser`,
@@ -111,7 +123,7 @@ function Users() {
                   key="action"
                   render={(text, record) => (
                     <Space size="middle">
-                      <a>Editar </a>
+                      <Button>Editar</Button>
                       <Button
                         onClick={() => {
                           deleteUser(record.idUser);
