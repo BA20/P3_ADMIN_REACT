@@ -34,9 +34,19 @@ function UserCreate() {
   const [Email, setEmail] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [ResponseStatus, setResponseStatus] = useState(false);
-  const [MensagemStatus, setMensagemStatus] = useState("");
+  const [MensagemStatus, setMensagemStatus] = useState([]);
 
   const addPais = () => {
+    if (
+      Password.length <= 1 ||
+      Name.length <= 1 ||
+      Email.length <= 1 ||
+      PhoneNumber.length <= 1
+    ) {
+      setMensagemStatus("Campos Vazios!");
+      setResponseStatus(false);
+      //setAlert(true);
+    }
     Axios.post(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createUserPais`,
       {
@@ -46,9 +56,11 @@ function UserCreate() {
         PhoneNumber: PhoneNumber,
       }
     ).then((response) => {
-      setMensagemStatus(response.MensagemStatus);
-      setResponseStatus(response.ResponseStatus);
-      console.log(response);
+      console.log(response.data);
+      setResponseStatus(response.data.ResponseStatus);
+      setMensagemStatus(response.data.mensagemStatus);
+      console.log(response.data.mensagemStatus);
+      console.log(MensagemStatus);
     });
   };
 
@@ -172,13 +184,15 @@ function UserCreate() {
                       />
                     </Form.Item>
                     <Form.Item {...tailLayout}>
-                      <Button
-                        type="primary"
+                      <Link
+                        to="/users"
                         onClick={addPais}
-                        htmlType="submit"
+                        ResponseStatus={ResponseStatus}
                       >
-                        Criar
-                      </Button>
+                        <Button type="primary" htmlType="submit">
+                          Criar
+                        </Button>
+                      </Link>
                     </Form.Item>
                   </Form>
                 </div>
@@ -186,6 +200,7 @@ function UserCreate() {
               <Col span={8}></Col>
             </Row>
             <h1>{ResponseStatus}</h1>
+            <h1>{MensagemStatus}</h1>
           </Content>
         </Layout>
       </Layout>

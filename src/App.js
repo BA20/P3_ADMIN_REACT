@@ -42,7 +42,7 @@ export default function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const [alert, setAlert] = useState(false);
+  //const [alert, setAlert] = useState(false);
   const [loginStatus, setLoginStatus] = useState(false);
   const [isAuth, setisAuth] = useState(false);
   Axios.defaults.withCredentials = true;
@@ -50,11 +50,11 @@ export default function App() {
   const login = () => {
     if (password.length <= 1) {
       setLoginStatus("Campos Vazios!");
-      setAlert(true);
+      //setAlert(true);
     }
     if (username.length <= 1) {
       setLoginStatus("Campos Vazios!");
-      setAlert(true);
+      //setAlert(true);
     } else {
       Axios.post(
         `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/login`,
@@ -66,7 +66,7 @@ export default function App() {
       ).then((response) => {
         if (!response.data.auth) {
           setLoginStatus(response.data.message);
-          setAlert(true);
+          // setAlert(true);
         } else {
           console.log(response.data.message);
           localStorage.setItem("token", response.data.token);
@@ -157,7 +157,7 @@ export default function App() {
                       </Form.Item>
 
                       <Form.Item {...tailLayout}>
-                        <Link to="/home" onClick={login} isAuth={isAuth}>
+                        <Link to="/home" onClick={login}>
                           <Button
                             type="primary"
                             htmlType="submit"
@@ -165,6 +165,7 @@ export default function App() {
                               backgroundColor: "#001145",
                               borderColor: "#001145",
                             }}
+                            isAuth={isAuth}
                           >
                             Login
                           </Button>

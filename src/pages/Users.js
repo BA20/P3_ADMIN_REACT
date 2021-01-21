@@ -123,6 +123,7 @@ function Users() {
                 <Column
                   title="Action"
                   key="action"
+                  fixed="right"
                   render={(text, record) => (
                     <Space size="middle">
                       <Button>Editar</Button>
