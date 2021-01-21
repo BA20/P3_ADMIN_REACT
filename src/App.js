@@ -1,7 +1,6 @@
 import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
-import Alert from "@material-ui/lab/Alert";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -10,8 +9,6 @@ import "antd/dist/antd.css";
 import logo from "./pages/components/images/logovcv.png";
 import { Form, Input, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import background from "./pages/components/images/background-login.jpg";
 import Home from "./pages/Home";
@@ -137,9 +134,6 @@ export default function App() {
                         remember: true,
                       }}
                       className="login"
-                      style={{
-                        paddingTop: "30%",
-                      }}
                     >
                       <Form.Item
                         prefix={<UserOutlined />}
@@ -177,6 +171,7 @@ export default function App() {
                         </Link>
                       </Form.Item>
                     </Form>
+                    <h1> {loginStatus}</h1>
                   </Col>
                 </Row>
                 <Row
@@ -187,25 +182,6 @@ export default function App() {
                 ></Row>
               </Container>
             </div>
-
-            <Alert
-              variant="filled"
-              severity="error"
-              action={
-                <IconButton
-                  aria-label="close"
-                  color="inherit"
-                  size="small"
-                  onClick={() => {
-                    setAlert(false);
-                  }}
-                >
-                  <CloseIcon fontSize="inherit" />
-                </IconButton>
-              }
-            >
-              {loginStatus}
-            </Alert>
           </div>
         </Route>
         <Route path="/user">
