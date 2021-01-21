@@ -1,25 +1,57 @@
 import React from "react";
+import { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Layout } from "antd";
 import TopBar from "./components/TopBar";
 import NavBar from "./components/NavBar";
 import background from "./components/images/background-login.jpg";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { Form, Input, Button, Select } from "antd";
-import { FormInstance } from "antd/lib/form";
-//import Axios from "axios";
-const { Option } = Select;
+import { LeftOutlined } from "@ant-design/icons";
+import { Row, Col } from "antd";
+import Axios from "axios";
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
 //  import jwt from "jwt-decode";
 const { Header, Sider, Content } = Layout;
+const layout = {
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 16,
+  },
+};
+const tailLayout = {
+  wrapperCol: {
+    offset: 8,
+    span: 16,
+  },
+};
 
 function UserCreate() {
+  const [Password, setPassword] = useState("");
+  const [Name, setName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [PhoneNumber, setPhoneNumber] = useState("");
+  const [ResponseStatus, setResponseStatus] = useState(false);
+  const [MensagemStatus, setMensagemStatus] = useState("");
+
+  const addPais = () => {
+    Axios.post(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createUserPais`,
+      {
+        password: Password,
+        name: Name,
+        email: Email,
+        PhoneNumber: PhoneNumber,
+      }
+    ).then((response) => {
+      setMensagemStatus(response.MensagemStatus);
+      setResponseStatus(response.ResponseStatus);
+      console.log(response);
+    });
+  };
+
   return (
     <div
       className="App"
@@ -55,13 +87,106 @@ function UserCreate() {
           </Header>
           <Content
             style={{
-              backgroundImage: `url(${background})`,
-              backgroundColor: "#007BFF",
+              backgroundColor: "#FFFFFF",
               backgroundPosition: "center",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
+              paddingTop: "20px",
             }}
-          ></Content>
+          >
+            {" "}
+            <Row>
+              <Col span={8}>
+                {" "}
+                <Link to="/users">
+                  {" "}
+                  <Button shape="circle" icon={<LeftOutlined />} />
+                </Link>
+              </Col>
+              <Col span={8}>
+                <h1>Criar Enc.de Educação</h1>
+              </Col>
+              <Col span={8}></Col>
+            </Row>
+            <Row>
+              <Col span={8}></Col>
+              <Col span={8}>
+                {" "}
+                <div>
+                  <Form
+                    {...layout}
+                    name="basic"
+                    initialValues={{
+                      remember: true,
+                    }}
+                    className="createUser"
+                  >
+                    <Form.Item
+                      label="Nome"
+                      name="Name"
+                      rules={[{ required: true }]}
+                      {...tailLayout}
+                    >
+                      <Input
+                        onChange={(e) => {
+                          setName(e.target.value);
+                        }}
+                      />
+                    </Form.Item>
+
+                    <Form.Item
+                      label="Password"
+                      name="password"
+                      rules={[{ required: true }]}
+                      {...tailLayout}
+                    >
+                      <Input
+                        type="password"
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                        }}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Email"
+                      name="Email"
+                      rules={[{ required: true }]}
+                      {...tailLayout}
+                    >
+                      <Input
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Telefone"
+                      name="PhoneNumber"
+                      rules={[{ required: true }]}
+                      {...tailLayout}
+                    >
+                      <Input
+                        onChange={(e) => {
+                          setPhoneNumber(e.target.value);
+                        }}
+                      />
+                    </Form.Item>
+                    <Form.Item {...tailLayout}>
+                      <Button
+                        type="primary"
+                        onClick={addPais}
+                        htmlType="submit"
+                      >
+                        Criar
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                </div>
+              </Col>
+              <Col span={8}></Col>
+            </Row>
+            <h1>{ResponseStatus}</h1>
+          </Content>
         </Layout>
       </Layout>
     </div>

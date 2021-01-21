@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
-import Alert from "react-bootstrap/Alert";
+import Alert from "@material-ui/lab/Alert";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -10,7 +10,8 @@ import "antd/dist/antd.css";
 import logo from "./pages/components/images/logovcv.png";
 import { Form, Input, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import background from "./pages/components/images/background-login.jpg";
 import Home from "./pages/Home";
@@ -93,112 +94,118 @@ export default function App() {
               backgroundRepeat: "no-repeat",
               height: "100vh",
               margin: "auto",
-              display: "flex",
-              direction: "column",
+              display: "grid",
             }}
           >
-            <>
-              <div></div>
-              <div
-                className="login"
+            <div
+              className="login"
+              style={{
+                display: "grid",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh",
+                padding: "0px",
+                margin: "auto",
+                width: "50%",
+                backgroundColor: "rgba(255,255,255, 0.9)",
+              }}
+            >
+              <Container
                 style={{
-                  display: "flex",
+                  display: "grid",
                   justifyContent: "center",
                   alignItems: "center",
-                  height: "100vh",
-                  padding: "0px",
-                  margin: "auto",
-                  width: "50%",
-                  backgroundColor: "rgba(255,255,255, 0.9)",
                 }}
               >
-                <Container
+                <Row>
+                  <Col>
+                    <Image
+                      src={logo}
+                      roundedCircle
+                      style={{
+                        padding: "20px",
+                      }}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="login">
+                    <Form
+                      {...layout}
+                      name="basic"
+                      initialValues={{
+                        remember: true,
+                      }}
+                      className="login"
+                      style={{
+                        paddingTop: "30%",
+                      }}
+                    >
+                      <Form.Item
+                        prefix={<UserOutlined />}
+                        label="Username "
+                        name="username"
+                      >
+                        <Input
+                          onChange={(e) => {
+                            setUsername(e.target.value);
+                          }}
+                        />
+                      </Form.Item>
+
+                      <Form.Item label="Password" name="password">
+                        <Input
+                          type="password"
+                          onChange={(e) => {
+                            setPassword(e.target.value);
+                          }}
+                        />
+                      </Form.Item>
+
+                      <Form.Item {...tailLayout}>
+                        <Link to="/home" onClick={login} isAuth={isAuth}>
+                          <Button
+                            type="primary"
+                            htmlType="submit"
+                            style={{
+                              backgroundColor: "#001145",
+                              borderColor: "#001145",
+                            }}
+                          >
+                            Login
+                          </Button>
+                        </Link>
+                      </Form.Item>
+                    </Form>
+                  </Col>
+                </Row>
+                <Row
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    display: "-ms-flexbox",
+                    paddingBlockEnd: "0px",
+                  }}
+                ></Row>
+              </Container>
+            </div>
+
+            <Alert
+              variant="filled"
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setAlert(false);
                   }}
                 >
-                  <Row>
-                    <Col>
-                      <Image
-                        src={logo}
-                        roundedCircle
-                        style={{
-                          padding: "20px",
-                        }}
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="login">
-                      <Form
-                        {...layout}
-                        name="basic"
-                        initialValues={{
-                          remember: true,
-                        }}
-                        className="login"
-                        style={{
-                          paddingTop: "30%",
-                        }}
-                      >
-                        <Form.Item
-                          prefix={<UserOutlined />}
-                          label="Username "
-                          name="username"
-                        >
-                          <Input
-                            onChange={(e) => {
-                              setUsername(e.target.value);
-                            }}
-                          />
-                        </Form.Item>
-
-                        <Form.Item label="Password" name="password">
-                          <Input
-                            type="password"
-                            onChange={(e) => {
-                              setPassword(e.target.value);
-                            }}
-                          />
-                        </Form.Item>
-
-                        <Form.Item {...tailLayout}>
-                          <Link to="/home" onClick={login} isAuth={isAuth}>
-                            <Button
-                              type="primary"
-                              htmlType="submit"
-                              style={{
-                                backgroundColor: "#001145",
-                                borderColor: "#001145",
-                              }}
-                            >
-                              Login
-                            </Button>
-                          </Link>
-                        </Form.Item>
-                      </Form>
-                    </Col>
-                  </Row>
-                  <Row
-                    style={{
-                      display: "-ms-flexbox",
-                      paddingBlockEnd: "0px",
-                    }}
-                  >
-                    <Alert
-                      variant="danger"
-                      onClose={() => setAlert(false)}
-                      dismissible
-                      show={alert}
-                    >
-                      <Alert.Heading>{loginStatus}</Alert.Heading>
-                    </Alert>
-                  </Row>
-                </Container>
-              </div>
-            </>
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              {loginStatus}
+            </Alert>
           </div>
         </Route>
         <Route path="/user">
