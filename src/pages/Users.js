@@ -91,62 +91,76 @@ function Users() {
           >
             <div
               style={{
-                paddingLeft: "100px",
-                paddingTop: "20px",
-                paddingBlockEnd: "10px",
-                height: "70%",
-                width: "100%",
+                display: "flex",
               }}
             >
-              <Table dataSource={UserList}>
-                <ColumnGroup
-                  title="idUser"
-                  dataIndex="idUser"
-                  key="idUser"
-                ></ColumnGroup>
-                <ColumnGroup
-                  title="Nome"
-                  dataIndex="Name"
-                  key="Name"
-                ></ColumnGroup>
-                <ColumnGroup
-                  title="Email"
-                  dataIndex="Email"
-                  key="Email"
-                ></ColumnGroup>
-                <ColumnGroup
-                  title="Telemóvel"
-                  dataIndex="PhoneNumber"
-                  key="PhoneNumber"
-                ></ColumnGroup>
+              <div
+                style={{
+                  paddingLeft: "100px",
+                  paddingTop: "20px",
+                  paddingBlockEnd: "10px",
+                  height: "60%",
+                  width: "100%",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    paddingRight: 0,
+                  }}
+                >
+                  <Link to="/usersCreate">
+                    <Button
+                      type="primary"
+                      shape="circle"
+                      icon={<PlusCircleOutlined />}
+                      size={"large"}
+                    />
+                  </Link>
+                </div>
+                <Table dataSource={UserList} size="small">
+                  <ColumnGroup
+                    title="idUser"
+                    dataIndex="idUser"
+                    key="idUser"
+                    rowSpan="5"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Nome"
+                    dataIndex="Name"
+                    key="Name"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Email"
+                    dataIndex="Email"
+                    key="Email"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Telemóvel"
+                    dataIndex="PhoneNumber"
+                    key="PhoneNumber"
+                  ></ColumnGroup>
 
-                <Column
-                  title="Action"
-                  key="action"
-                  fixed="right"
-                  render={(text, record) => (
-                    <Space size="middle">
-                      <Button>Editar</Button>
-                      <Button
-                        onClick={() => {
-                          deleteUser(record.idUser);
-                        }}
-                      >
-                        Eliminar
-                      </Button>
-                    </Space>
-                  )}
-                />
-              </Table>
-              <Link to="/usersCreate">
-                <Button
-                  type="primary"
-                  shape="circle"
-                  icon={<PlusCircleOutlined />}
-                  size={"large"}
-                />
-              </Link>
-              <h1>{ResponseStatus}</h1>
+                  <Column
+                    title="Action"
+                    key="action"
+                    fixed="right"
+                    render={(text, record) => (
+                      <Space size="middle">
+                        <Button>Editar</Button>
+                        <Button
+                          onClick={() => {
+                            deleteUser(record.idUser);
+                          }}
+                        >
+                          Eliminar
+                        </Button>
+                      </Space>
+                    )}
+                  />
+                </Table>
+                <h1>{ResponseStatus}</h1>
+              </div>
             </div>
           </Content>
         </Layout>

@@ -56,11 +56,16 @@ function UserCreate() {
         PhoneNumber: PhoneNumber,
       }
     ).then((response) => {
-      console.log(response.data);
-      setResponseStatus(response.data.ResponseStatus);
-      setMensagemStatus(response.data.mensagemStatus);
-      console.log(response.data.mensagemStatus);
-      console.log(MensagemStatus);
+      if (!response.data.ResponseStatus) {
+        console.log(response.data);
+        setMensagemStatus(response.data.mensagemStatus);
+        setResponseStatus(false);
+      } else {
+        setResponseStatus(true);
+        setMensagemStatus(response.data.mensagemStatus);
+        console.log(response.data.mensagemStatus);
+        console.log(MensagemStatus);
+      }
     });
   };
 
@@ -87,7 +92,7 @@ function UserCreate() {
         <Sider
           style={{
             backgroundColor: "#001145",
-            paddingTop: "74px",
+            paddingTop: 74,
             width: 256,
           }}
         >
@@ -103,7 +108,7 @@ function UserCreate() {
               backgroundPosition: "center",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
-              paddingTop: "20px",
+              paddingTop: 54,
             }}
           >
             {" "}
@@ -184,11 +189,7 @@ function UserCreate() {
                       />
                     </Form.Item>
                     <Form.Item {...tailLayout}>
-                      <Link
-                        to="/users"
-                        onClick={addPais}
-                        ResponseStatus={ResponseStatus}
-                      >
+                      <Link to="/users" onClick={addPais} ResponseStatus="true">
                         <Button type="primary" htmlType="submit">
                           Criar
                         </Button>
