@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { Layout } from "antd";
 import TopBar from "./components/TopBar";
@@ -10,6 +10,9 @@ import { Form, Input, Button, Select } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { Row, Col } from "antd";
 import Axios from "axios";
+import { Cascader } from "antd";
+import { DatePicker, Space } from "antd";
+import moment from "moment";
 
 //  import jwt from "jwt-decode";
 const { Header, Sider, Content } = Layout;
@@ -28,19 +31,33 @@ const tailLayout = {
   },
 };
 
-function UserCreate() {
-  const [Password, setPassword] = useState("");
-  const [Name, setName] = useState("");
+function AtletasCreate() {
+  const [nameAtl, setnameAtl] = useState("");
   const [Email, setEmail] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
+  const [Height, setHeight] = useState("");
+  const [Weight, setWeight] = useState("");
+  const [ArmSpan, setArmSpan] = useState("");
+  const [BirthDate, setBirthDate] = useState();
+  const [idUser, setidUser] = useState("");
+  const [options, setoptions] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState(false);
   const [MensagemStatus, setMensagemStatus] = useState([]);
 
-  const addPais = () => {
+  useEffect(() => {
+    Axios.get(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/getidpai`
+    ).then((response) => {
+      console.log(response.data);
+      setoptions(response.data);
+    });
+  }, []);
+
+  const addAtleta = () => {
     if (
-      Password.length <= 1 ||
-      Name.length <= 1 ||
+      nameAtl.length <= 1 ||
       Email.length <= 1 ||
+      idUser.length <= 0 ||
       PhoneNumber.length <= 1
     ) {
       setMensagemStatus("Campos Vazios!");
@@ -48,12 +65,16 @@ function UserCreate() {
       //setAlert(true);
     }
     Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createUserPais`,
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createatleta`,
       {
-        password: Password,
-        name: Name,
-        email: Email,
+        nameAtl: nameAtl,
         PhoneNumber: PhoneNumber,
+        email: Email,
+        Height: Height,
+        Weight: Weight,
+        ArmSpan: ArmSpan,
+        BirthDate: BirthDate,
+        idUser: idUser,
       }
     ).then((response) => {
       if (!response.data.ResponseStatus) {
@@ -115,13 +136,13 @@ function UserCreate() {
             <Row>
               <Col span={8}>
                 {" "}
-                <Link to="/users">
+                <Link to="/atletas">
                   {" "}
                   <Button shape="circle" icon={<LeftOutlined />} />
                 </Link>
               </Col>
               <Col span={8}>
-                <h1>Criar Enc.de Educação</h1>
+                <h1>Criar Atleta</h1>
               </Col>
               <Col span={8}></Col>
             </Row>
@@ -146,21 +167,7 @@ function UserCreate() {
                     >
                       <Input
                         onChange={(e) => {
-                          setName(e.target.value);
-                        }}
-                      />
-                    </Form.Item>
-
-                    <Form.Item
-                      label="Password"
-                      name="password"
-                      rules={[{ required: true }]}
-                      {...tailLayout}
-                    >
-                      <Input
-                        type="password"
-                        onChange={(e) => {
-                          setPassword(e.target.value);
+                          setnameAtl(e.target.value);
                         }}
                       />
                     </Form.Item>
@@ -188,10 +195,76 @@ function UserCreate() {
                         }}
                       />
                     </Form.Item>
+                    <Form.Item
+                      label="Altura"
+                      name="Height"
+                      rules={[{ required: true }]}
+                      {...tailLayout}
+                    >
+                      <Input
+                        onChange={(e) => {
+                          setHeight(e.target.value);
+                        }}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Peso"
+                      name="Weight"
+                      rules={[{ required: true }]}
+                      {...tailLayout}
+                    >
+                      <Input
+                        onChange={(e) => {
+                          setWeight(e.target.value);
+                        }}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Largura"
+                      name="ArmSpan"
+                      rules={[{ required: true }]}
+                      {...tailLayout}
+                    >
+                      <Input
+                        onChange={(e) => {
+                          setArmSpan(e.target.value);
+                        }}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Enc.Educação"
+                      name="idUser"
+                      rules={[{ required: true }]}
+                      {...tailLayout}
+                    >
+                      <Cascader
+                        label="Enc.Educação"
+                        options={options}
+                        defaultValue={0}
+                        onChange={(value) => {
+                          setidUser(value);
+                        }}
+                        placeholder="Enc."
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Data de Nasc.:"
+                      name="idUser"
+                      rules={[{ required: true }]}
+                      {...tailLayout}
+                    >
+                      <DatePicker
+                        placeholder="data"
+                        format={"YYYY/MM/DD"}
+                        onChange={(dateString) => {
+                          setBirthDate(dateString);
+                        }}
+                      />
+                    </Form.Item>
                     <Form.Item {...tailLayout}>
                       <Button
                         type="primary"
-                        onClick={addPais}
+                        onClick={addAtleta}
                         htmlType="submit"
                       >
                         Criar
@@ -211,4 +284,4 @@ function UserCreate() {
   );
 }
 
-export default withRouter(UserCreate);
+export default withRouter(AtletasCreate);

@@ -14,7 +14,9 @@ import background from "./pages/components/images/background-login.jpg";
 import Home from "./pages/Home";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Atletas from "./pages/Atletas";
+import AtletasCreate from "./pages/AtletasCreate";
 import Treinadores from "./pages/Treinadores";
+import TreinadorCreate from "./pages/TreinadorCreate";
 import Eventos from "./pages/Eventos";
 import Avaliacao from "./pages/Avaliacao";
 import Exercicios from "./pages/Exercicios";
@@ -197,6 +199,9 @@ export default function App() {
         <Route path="/treinadores">
           <Treinadores />
         </Route>
+        <Route path="/TreinadorCreate">
+          <usersCreate />
+        </Route>
         <Route path="/eventos">
           <Eventos />
         </Route>
@@ -232,8 +237,19 @@ export default function App() {
         isAuth={isAuth}
       ></ProtectedRoute>
       <ProtectedRoute
+        path="/AtletasCreate"
+        component={AtletasCreate}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+
+      <ProtectedRoute
         path="/treinadores"
         component={Treinadores}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/TreinadorCreate"
+        component={TreinadorCreate}
         isAuth={isAuth}
       ></ProtectedRoute>
       <ProtectedRoute

@@ -1,15 +1,53 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { withRouter, Link } from "react-router-dom";
+
 import { Layout } from "antd";
 import TopBar from "./components/TopBar";
 import NavBar from "./components/NavBar";
 import background from "./components/images/background-login.jpg";
-//import Axios from "axios";
+import Axios from "axios";
+import { PlusCircleOutlined } from "@ant-design/icons";
+import { Table, Space, Button } from "antd";
+
+const { Column, ColumnGroup } = Table;
 
 //  import jwt from "jwt-decode";
 const { Header, Sider, Content } = Layout;
 
-function Treinador() {
+function Treinadores() {
+  const [UserList, setUserList] = useState([]);
+  const [ResponseStatus, setResponseStatus] = useState();
+
+  const updateUser = (id) => {
+    Axios.put(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/`,
+      {
+        id: id,
+      }
+    ).then((response) => {
+      console.log(response);
+      setResponseStatus(`Editado o User ${id}`);
+    });
+  };
+
+  const deleteUser = (id) => {
+    Axios.post(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteUser`,
+      {
+        id: id,
+      }
+    ).then((response) => {
+      console.log(response);
+      setResponseStatus(`Eliminado o User ${id}`);
+    });
+  };
+  useEffect(() => {
+    Axios.get(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/usersTreinador`
+    ).then((response) => {
+      setUserList(response.data);
+    });
+  }, [ResponseStatus]);
   return (
     <div
       className="App"
@@ -45,14 +83,85 @@ function Treinador() {
           </Header>
           <Content
             style={{
-              backgroundImage: `url(${background})`,
-              backgroundColor: "#007BFF",
+              backgroundColor: "#FFFFSFF",
               backgroundPosition: "center",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
             }}
           >
-            <h1>Treinador</h1>
+            <div
+              style={{
+                display: "flex",
+              }}
+            >
+              <div
+                style={{
+                  paddingLeft: "100px",
+                  paddingTop: "20px",
+                  paddingBlockEnd: "10px",
+                  height: "60%",
+                  width: "100%",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    paddingRight: 0,
+                  }}
+                >
+                  <Link to="/TreinadorCreate">
+                    <Button
+                      type="primary"
+                      shape="circle"
+                      icon={<PlusCircleOutlined />}
+                      size={"large"}
+                    />
+                  </Link>
+                </div>
+                <Table dataSource={UserList} size="small">
+                  <ColumnGroup
+                    title="idUser"
+                    dataIndex="idUser"
+                    key="idUser"
+                    rowSpan="5"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Nome"
+                    dataIndex="Name"
+                    key="Name"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Email"
+                    dataIndex="Email"
+                    key="Email"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Telemóvel"
+                    dataIndex="PhoneNumber"
+                    key="PhoneNumber"
+                  ></ColumnGroup>
+
+                  <Column
+                    title="Action"
+                    key="action"
+                    fixed="right"
+                    render={(text, record) => (
+                      <Space size="middle">
+                        <Button>Editar</Button>
+                        <Button
+                          onClick={() => {
+                            deleteUser(record.idUser);
+                          }}
+                        >
+                          Eliminar
+                        </Button>
+                      </Space>
+                    )}
+                  />
+                </Table>
+                <h1>{ResponseStatus}</h1>
+              </div>
+            </div>
           </Content>
         </Layout>
       </Layout>
@@ -60,4 +169,4 @@ function Treinador() {
   );
 }
 
-export default withRouter(Treinador);
+export default withRouter(Treinadores);

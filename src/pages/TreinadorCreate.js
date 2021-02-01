@@ -28,7 +28,7 @@ const tailLayout = {
   },
 };
 
-function UserCreate() {
+function TreinadorCreate() {
   const [Password, setPassword] = useState("");
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
@@ -48,7 +48,7 @@ function UserCreate() {
       //setAlert(true);
     }
     Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createUserPais`,
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createUserTreinador`,
       {
         password: Password,
         name: Name,
@@ -115,13 +115,13 @@ function UserCreate() {
             <Row>
               <Col span={8}>
                 {" "}
-                <Link to="/users">
+                <Link to="/treinadores">
                   {" "}
                   <Button shape="circle" icon={<LeftOutlined />} />
                 </Link>
               </Col>
               <Col span={8}>
-                <h1>Criar Enc.de Educação</h1>
+                <h1>Criar Treinador</h1>
               </Col>
               <Col span={8}></Col>
             </Row>
@@ -211,4 +211,4 @@ function UserCreate() {
   );
 }
 
-export default withRouter(UserCreate);
+export default withRouter(TreinadorCreate);
