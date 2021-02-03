@@ -38,12 +38,11 @@ function AtletasCreate() {
   const [Height, setHeight] = useState("");
   const [Weight, setWeight] = useState("");
   const [ArmSpan, setArmSpan] = useState("");
-  const [BirthDate, setBirthDate] = useState();
+  const [BirthDate, setBirthDate] = useState("");
   const [idUser, setidUser] = useState("");
   const [options, setoptions] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState(false);
   const [MensagemStatus, setMensagemStatus] = useState([]);
-
   useEffect(() => {
     Axios.get(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/getidpai`
@@ -168,6 +167,7 @@ function AtletasCreate() {
                       <Input
                         onChange={(e) => {
                           setnameAtl(e.target.value);
+                          console.log(nameAtl);
                         }}
                       />
                     </Form.Item>
@@ -241,7 +241,9 @@ function AtletasCreate() {
                         label="Enc.Educação"
                         options={options}
                         defaultValue={0}
-                        onChange={(value) => {
+                        onChange={(value, selectedOptions) => {
+                          setidUser(value);
+                          console.log(value, selectedOptions);
                           setidUser(value);
                         }}
                         placeholder="Enc."
@@ -249,15 +251,16 @@ function AtletasCreate() {
                     </Form.Item>
                     <Form.Item
                       label="Data de Nasc.:"
-                      name="idUser"
+                      name="BirthDate"
                       rules={[{ required: true }]}
                       {...tailLayout}
                     >
                       <DatePicker
                         placeholder="data"
                         format={"YYYY/MM/DD"}
-                        onChange={(dateString) => {
-                          setBirthDate(dateString);
+                        onChange={(value) => {
+                          console.log(moment(value).format("YYYY-MM-DD"));
+                          setBirthDate(moment(value).format("YYYY-MM-DD"));
                         }}
                       />
                     </Form.Item>
