@@ -5,8 +5,8 @@ import { Layout } from "antd";
 import TopBar from "./components/TopBar";
 import NavBar from "./components/NavBar";
 import background from "./components/images/background-login.jpg";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import { Form, Input, Button, Select } from "antd";
+import { BrowserRouter as Link } from "react-router-dom";
+import { Form, Input, Button } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { Row, Col } from "antd";
 import Axios from "axios";
@@ -111,12 +111,9 @@ function UserCreate() {
               paddingTop: 54,
             }}
           >
-            {" "}
             <Row>
               <Col span={8}>
-                {" "}
                 <Link to="/users">
-                  {" "}
                   <Button shape="circle" icon={<LeftOutlined />} />
                 </Link>
               </Col>

@@ -18,7 +18,7 @@ function Atletas() {
   const [AtletasList, setAtletasList] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
 
-  const updateUser = (id) => {
+  /* const updateUser = (id) => {
     Axios.put(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/`,
       {
@@ -28,7 +28,7 @@ function Atletas() {
       console.log(response);
       setResponseStatus(`Editado Atleta ${id}`);
     });
-  };
+  };*/
 
   const deleteAtleta = (id) => {
     Axios.post(

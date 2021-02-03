@@ -18,7 +18,7 @@ function Users() {
   const [UserList, setUserList] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
 
-  const updateUser = (id) => {
+  /* const updateUser = (id) => {
     Axios.put(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/`,
       {
@@ -28,7 +28,7 @@ function Users() {
       console.log(response);
       setResponseStatus(`Editado o User ${id}`);
     });
-  };
+  };*/
 
   const deleteUser = (id) => {
     Axios.post(
