@@ -1,15 +1,42 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { withRouter, Link } from "react-router-dom";
+
 import { Layout } from "antd";
 import TopBar from "./components/TopBar";
 import NavBar from "./components/NavBar";
 import background from "./components/images/background-login.jpg";
-//import Axios from "axios";
+import Axios from "axios";
+import { PlusCircleOutlined } from "@ant-design/icons";
+import { Table, Space, Button } from "antd";
+
+const { Column, ColumnGroup } = Table;
 
 //  import jwt from "jwt-decode";
 const { Header, Sider, Content } = Layout;
 
 function Exercicios() {
+  const [ExeList, setExeList] = useState([]);
+  const [ResponseStatus, setResponseStatus] = useState();
+
+  const deleteExe = (id) => {
+    Axios.post(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteExercise`,
+      {
+        id: id,
+      }
+    ).then((response) => {
+      console.log(response);
+      setResponseStatus(`Eliminado o Exercicio ${id}`);
+    });
+  };
+  useEffect(() => {
+    Axios.get(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/exercise`
+    ).then((response) => {
+      setExeList(response.data);
+    });
+  }, [ResponseStatus]);
+
   return (
     <div
       className="App"
@@ -45,14 +72,95 @@ function Exercicios() {
           </Header>
           <Content
             style={{
-              backgroundImage: `url(${background})`,
-              backgroundColor: "#007BFF",
+              backgroundColor: "#FFFFSFF",
               backgroundPosition: "center",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
             }}
           >
-            <h1>Exercicios</h1>
+            <div
+              style={{
+                display: "flex",
+              }}
+            >
+              <div
+                style={{
+                  paddingLeft: "100px",
+                  paddingTop: "20px",
+                  paddingBlockEnd: "10px",
+                  height: "60%",
+                  width: "100%",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    paddingRight: 0,
+                  }}
+                >
+                  <Link to="/exerciciosCreate">
+                    <Button
+                      type="primary"
+                      shape="circle"
+                      icon={<PlusCircleOutlined />}
+                      size={"large"}
+                    />
+                  </Link>
+                </div>
+                <Table dataSource={ExeList} size="small">
+                  <ColumnGroup
+                    title="idExercise"
+                    dataIndex="idExercise"
+                    key="idExercise"
+                    rowSpan="5"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Nome"
+                    dataIndex="Name"
+                    key="Name"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Descrição"
+                    dataIndex="Descrição"
+                    key="Descrição"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="ObjectivoEsp"
+                    dataIndex="ObjectivoEsp"
+                    key="ObjectivoEsp"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Duration"
+                    dataIndex="Duration"
+                    key="Duration"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Esquema_link"
+                    dataIndex="Esquema_link"
+                    key="Esquema_link"
+                  ></ColumnGroup>
+
+                  <Column
+                    title="Action"
+                    key="action"
+                    fixed="right"
+                    render={(text, record) => (
+                      <Space size="middle">
+                        <Button>Editar</Button>
+                        <Button
+                          onClick={() => {
+                            deleteExe(record.idUser);
+                          }}
+                        >
+                          Eliminar
+                        </Button>
+                      </Space>
+                    )}
+                  />
+                </Table>
+                <h1>{ResponseStatus}</h1>
+              </div>
+            </div>
           </Content>
         </Layout>
       </Layout>

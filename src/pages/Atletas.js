@@ -17,6 +17,14 @@ const { Header, Sider, Content } = Layout;
 function Atletas() {
   const [AtletasList, setAtletasList] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
+  useEffect(() => {
+    Axios.get(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/atletas`
+    ).then((response) => {
+      setAtletasList(response.data);
+      console.log(response.data);
+    });
+  }, [ResponseStatus]);
 
   /* const updateUser = (id) => {
     Axios.put(
@@ -41,14 +49,7 @@ function Atletas() {
       setResponseStatus(`Eliminado Atleta ${id}`);
     });
   };
-  useEffect(() => {
-    Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/atletas`
-    ).then((response) => {
-      setAtletasList(response.data);
-      console.log(response.data);
-    });
-  }, [ResponseStatus]);
+
   return (
     <div
       className="App"
@@ -65,6 +66,7 @@ function Atletas() {
       }}
     >
       <Layout
+        id={Atletas}
         style={{
           display: "-moz-initial  ",
         }}
@@ -119,7 +121,7 @@ function Atletas() {
                     />
                   </Link>
                 </div>
-                <Table dataSource={AtletasList} size="small">
+                <Table dataSource={AtletasList} id={Atletas} size="small">
                   <ColumnGroup
                     title="idAthlete"
                     dataIndex="idAthlete"
