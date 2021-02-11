@@ -26,6 +26,10 @@ import UsersCreate from "./pages/usersCreate";
 import ExerciciosCreate from "./pages/ExerciciosCreate";
 import Teams from "./pages/Teams";
 import TeamsCreate from "./pages/TeamsCreate";
+import Escalao from "./pages/Escalao";
+import EscalaoCreate from "./pages/EscalaoCreate";
+import Sets from "./pages/Sets";
+import SetsCreate from "./pages/SetsCreate";
 require("dotenv").config();
 
 const layout = {
@@ -190,39 +194,6 @@ export default function App() {
             </div>
           </div>
         </Route>
-        <Route path="/user">
-          <Users />
-        </Route>
-        <Route path="/userCreate">
-          <usersCreate />
-        </Route>
-        <Route path="/atletas">
-          <Atletas />
-        </Route>
-        <Route path="/teams">
-          <Teams />
-        </Route>
-        <Route path="/teamsCreate">
-          <TeamsCreate />
-        </Route>
-        <Route path="/treinadores">
-          <Treinadores />
-        </Route>
-        <Route path="/TreinadorCreate">
-          <usersCreate />
-        </Route>
-        <Route path="/eventos">
-          <Eventos />
-        </Route>
-        <Route path="/avaliacao">
-          <Avaliacao />
-        </Route>
-        <Route path="/exercicios">
-          <Exercicios />
-        </Route>
-        <Route path="/outros">
-          <Outros />
-        </Route>
       </Switch>
 
       <ProtectedRoute
@@ -260,7 +231,16 @@ export default function App() {
         component={TeamsCreate}
         isAuth={isAuth}
       ></ProtectedRoute>
-
+      <ProtectedRoute
+        path="/escalao"
+        component={Escalao}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/escalaoCreate"
+        component={EscalaoCreate}
+        isAuth={isAuth}
+      ></ProtectedRoute>
       <ProtectedRoute
         path="/treinadores"
         component={Treinadores}
@@ -284,6 +264,16 @@ export default function App() {
       <ProtectedRoute
         path="/exercicios"
         component={Exercicios}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/sets"
+        component={Sets}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/setsCreate"
+        component={SetsCreate}
         isAuth={isAuth}
       ></ProtectedRoute>
       <ProtectedRoute
