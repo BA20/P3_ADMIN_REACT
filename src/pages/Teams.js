@@ -45,6 +45,7 @@ function Teams() {
     Axios.get(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/teams`
     ).then((response) => {
+      console.log(response.data);
       setTeamsList(response.data);
     });
   }, [ResponseStatus]);
@@ -109,7 +110,7 @@ function Teams() {
                     paddingRight: 0,
                   }}
                 >
-                  <Link to="/usersCreate">
+                  <Link to="/teamsCreate">
                     <Button
                       type="primary"
                       icon={<PlusCircleOutlined />}
@@ -133,6 +134,11 @@ function Teams() {
                   ></ColumnGroup>
                   <ColumnGroup
                     title="Nome"
+                    dataIndex="NameT"
+                    key="NameT"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Treinador"
                     dataIndex="Name"
                     key="Name"
                   ></ColumnGroup>
