@@ -14,8 +14,8 @@ const { Column, ColumnGroup } = Table;
 //  import jwt from "jwt-decode";
 const { Header, Sider, Content } = Layout;
 
-function Users() {
-  const [UserList, setUserList] = useState([]);
+function Teams() {
+  const [TeamsList, setTeamsList] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
 
   /* const updateUser = (id) => {
@@ -30,9 +30,9 @@ function Users() {
     });
   };*/
 
-  const deleteUser = (id) => {
+  const deleteTeams = (id) => {
     Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteUser`,
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteTeam`,
       {
         id: id,
       }
@@ -43,9 +43,9 @@ function Users() {
   };
   useEffect(() => {
     Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/userspais`
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/teams`
     ).then((response) => {
-      setUserList(response.data);
+      setTeamsList(response.data);
     });
   }, [ResponseStatus]);
   return (
@@ -115,31 +115,26 @@ function Users() {
                       icon={<PlusCircleOutlined />}
                       size={"large"}
                     >
-                      Criar Enc. Educação
+                      Criar Equipa
                     </Button>
                   </Link>
                 </div>
-                <Table dataSource={UserList} size="small">
+                <Table dataSource={TeamsList} size="small">
                   <ColumnGroup
-                    title="idUser"
-                    dataIndex="idUser"
-                    key="idUser"
+                    title="idEquipa"
+                    dataIndex="idTeam"
+                    key="idTeam"
                     rowSpan="5"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Escalão"
+                    dataIndex="NameEs"
+                    key="NameEs"
                   ></ColumnGroup>
                   <ColumnGroup
                     title="Nome"
                     dataIndex="Name"
                     key="Name"
-                  ></ColumnGroup>
-                  <ColumnGroup
-                    title="Email"
-                    dataIndex="Email"
-                    key="Email"
-                  ></ColumnGroup>
-                  <ColumnGroup
-                    title="Telemóvel"
-                    dataIndex="PhoneNumber"
-                    key="PhoneNumber"
                   ></ColumnGroup>
 
                   <Column
@@ -151,7 +146,7 @@ function Users() {
                         <Button>Editar</Button>
                         <Button
                           onClick={() => {
-                            deleteUser(record.idUser);
+                            deleteTeams(record.idUser);
                           }}
                         >
                           Eliminar
@@ -170,4 +165,4 @@ function Users() {
   );
 }
 
-export default withRouter(Users);
+export default withRouter(Teams);

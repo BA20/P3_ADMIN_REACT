@@ -101,10 +101,12 @@ function Exercicios() {
                   <Link to="/exerciciosCreate">
                     <Button
                       type="primary"
-                      shape="circle"
                       icon={<PlusCircleOutlined />}
                       size={"large"}
-                    />
+                    >
+                      {" "}
+                      Criar Exercício{" "}
+                    </Button>
                   </Link>
                 </div>
                 <Table dataSource={ExeList} size="small">

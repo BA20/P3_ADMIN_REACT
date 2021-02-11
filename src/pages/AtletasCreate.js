@@ -7,7 +7,7 @@ import NavBar from "./components/NavBar";
 import background from "./components/images/background-login.jpg";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { Form, Input, Button, Select } from "antd";
-import { LeftOutlined } from "@ant-design/icons";
+import { LeftOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Row, Col } from "antd";
 import Axios from "axios";
 import { Cascader } from "antd";
@@ -248,6 +248,13 @@ function AtletasCreate() {
                         }}
                         placeholder="Enc."
                       />
+                      <Link to="/usersCreate">
+                        <Button
+                          type="primary"
+                          icon={<PlusCircleOutlined />}
+                          size={"small"}
+                        ></Button>
+                      </Link>
                     </Form.Item>
                     <Form.Item
                       label="Data de Nasc.:"

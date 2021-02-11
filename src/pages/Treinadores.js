@@ -112,10 +112,11 @@ function Treinadores() {
                   <Link to="/TreinadorCreate">
                     <Button
                       type="primary"
-                      shape="circle"
                       icon={<PlusCircleOutlined />}
                       size={"large"}
-                    />
+                    >
+                      Criar Treinador
+                    </Button>
                   </Link>
                 </div>
                 <Table dataSource={UserList} size="small">

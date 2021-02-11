@@ -115,10 +115,11 @@ function Atletas() {
                   <Link to="/AtletasCreate">
                     <Button
                       type="primary"
-                      shape="circle"
                       icon={<PlusCircleOutlined />}
                       size={"large"}
-                    />
+                    >
+                      Criar Atleta
+                    </Button>
                   </Link>
                 </div>
                 <Table dataSource={AtletasList} id={Atletas} size="small">
