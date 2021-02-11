@@ -141,6 +141,39 @@ function Sets() {
                   />
                 </Table>
                 <h1>{ResponseStatus}</h1>
+
+                <h1>Selecionar Exercícios</h1>
+                <Table dataSource={sets} size="small">
+                  <ColumnGroup
+                    title="idSet"
+                    dataIndex="idSetExercise"
+                    key="idSetExercise"
+                    rowSpan="5"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Nome"
+                    dataIndex="NameSet"
+                    key="NameSet"
+                  ></ColumnGroup>
+
+                  <Column
+                    title="Action"
+                    key="action"
+                    fixed="right"
+                    render={(text, record) => (
+                      <Space size="middle">
+                        <Button>Editar</Button>
+                        <Button
+                          onClick={() => {
+                            deleteSet(record.idSetExercise);
+                          }}
+                        >
+                          Eliminar
+                        </Button>
+                      </Space>
+                    )}
+                  />
+                </Table>
               </div>
             </div>
           </Content>
