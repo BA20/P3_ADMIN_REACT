@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
-
+import { Cascader } from "antd";
 import { Layout } from "antd";
 import TopBar from "./components/TopBar";
 import NavBar from "./components/NavBar";
@@ -8,7 +8,7 @@ import background from "./components/images/background-login.jpg";
 import Axios from "axios";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { Table, Space, Button } from "antd";
-
+import CheckedSelect from "react-select-checked";
 const { Column, ColumnGroup } = Table;
 
 //  import jwt from "jwt-decode";
@@ -17,6 +17,22 @@ const { Header, Sider, Content } = Layout;
 function Sets() {
   const [sets, setsets] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
+  const [data, setdata] = useState([]);
+  /* const [id_set, setid_set] = useState("");
+  const [id_exe, setid_exe] = useState("");
+*/
+  const addSet_exe = (id_set, id_exe) => {
+    Axios.post(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/addSetExercise`,
+      {
+        id_set: id_set,
+        id_exe: id_exe,
+      }
+    ).then((response) => {
+      console.log(response);
+      setResponseStatus(`Add o Exercicio ${id_exe} ao Set ${id_set}`);
+    });
+  };
 
   const deleteSet = (id) => {
     Axios.post(
@@ -34,6 +50,11 @@ function Sets() {
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/SetExercise`
     ).then((response) => {
       setsets(response.data);
+    });
+    Axios.get(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/getidEscalao`
+    ).then((response) => {
+      setdata(response.data);
     });
   }, [ResponseStatus]);
 
@@ -108,6 +129,17 @@ function Sets() {
                       Criar Set{" "}
                     </Button>
                   </Link>
+
+                  <Link to="/setsExerCreate" style={{ paddingRight: 0 }}>
+                    <Button
+                      type="primary"
+                      icon={<PlusCircleOutlined />}
+                      size={"large"}
+                    >
+                      {" "}
+                      Adicionar Exercícios a Set{" "}
+                    </Button>
+                  </Link>
                 </div>
                 <Table dataSource={sets} size="small">
                   <ColumnGroup
@@ -141,39 +173,6 @@ function Sets() {
                   />
                 </Table>
                 <h1>{ResponseStatus}</h1>
-
-                <h1>Selecionar Exercícios</h1>
-                <Table dataSource={sets} size="small">
-                  <ColumnGroup
-                    title="idSet"
-                    dataIndex="idSetExercise"
-                    key="idSetExercise"
-                    rowSpan="5"
-                  ></ColumnGroup>
-                  <ColumnGroup
-                    title="Nome"
-                    dataIndex="NameSet"
-                    key="NameSet"
-                  ></ColumnGroup>
-
-                  <Column
-                    title="Action"
-                    key="action"
-                    fixed="right"
-                    render={(text, record) => (
-                      <Space size="middle">
-                        <Button>Editar</Button>
-                        <Button
-                          onClick={() => {
-                            deleteSet(record.idSetExercise);
-                          }}
-                        >
-                          Eliminar
-                        </Button>
-                      </Space>
-                    )}
-                  />
-                </Table>
               </div>
             </div>
           </Content>

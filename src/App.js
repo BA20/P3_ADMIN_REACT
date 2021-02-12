@@ -30,6 +30,7 @@ import Escalao from "./pages/Escalao";
 import EscalaoCreate from "./pages/EscalaoCreate";
 import Sets from "./pages/Sets";
 import SetsCreate from "./pages/SetsCreate";
+import SetsExerCreate from "./pages/SetsExerCreate";
 require("dotenv").config();
 
 const layout = {
@@ -274,6 +275,11 @@ export default function App() {
       <ProtectedRoute
         path="/setsCreate"
         component={SetsCreate}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/setsExerCreate"
+        component={SetsExerCreate}
         isAuth={isAuth}
       ></ProtectedRoute>
       <ProtectedRoute

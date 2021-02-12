@@ -35,6 +35,7 @@
     "react-feather": "^2.0.9",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-select-checked": "^0.1.12",
     "react-transition-group": "^4.4.1",
     "rsuite": "^4.8.6",
     "rsuite-table": "^3.14.2",
