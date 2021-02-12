@@ -65,6 +65,8 @@ function SetsExerCreate() {
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/ExeSetExercise`
     ).then((response) => {
       setExeSetExercise(response.data);
+      console.log(ExeSetExercise);
+      console.log("ANASDJAS");
     });
   }, [ResponseStatus]);
 
@@ -200,14 +202,14 @@ function SetsExerCreate() {
                       ></ColumnGroup>
 
                       <ColumnGroup
-                        title="ID Set   "
-                        dataIndex="SetExid"
-                        key="SetExid"
+                        title="Exercício"
+                        dataIndex="Name"
+                        key="Name"
                       ></ColumnGroup>
                       <ColumnGroup
-                        title="ID Exercicio"
-                        dataIndex="Extid"
-                        key="Extid"
+                        title="Set"
+                        dataIndex="NameSet"
+                        key="NameSet"
                       ></ColumnGroup>
                       <Column
                         title="Action"
