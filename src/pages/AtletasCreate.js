@@ -40,7 +40,10 @@ function AtletasCreate() {
   const [ArmSpan, setArmSpan] = useState("");
   const [BirthDate, setBirthDate] = useState("");
   const [idUser, setidUser] = useState("");
+  const [idTeam, setidTeam] = useState("");
   const [options, setoptions] = useState([]);
+  const [optionsT, setoptionsT] = useState([]);
+
   const [ResponseStatus, setResponseStatus] = useState(false);
   const [MensagemStatus, setMensagemStatus] = useState([]);
   useEffect(() => {
@@ -49,6 +52,12 @@ function AtletasCreate() {
     ).then((response) => {
       console.log(response.data);
       setoptions(response.data);
+    });
+    Axios.get(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/getidteams`
+    ).then((response) => {
+      console.log(response.data);
+      setoptionsT(response.data);
     });
   }, []);
 
@@ -74,6 +83,7 @@ function AtletasCreate() {
         ArmSpan: ArmSpan,
         BirthDate: BirthDate,
         idUser: idUser,
+        idTeam: idTeam,
       }
     ).then((response) => {
       if (!response.data.ResponseStatus) {
@@ -234,7 +244,6 @@ function AtletasCreate() {
                     <Form.Item
                       label="Enc.Educação"
                       name="idUser"
-                      rules={[{ required: true }]}
                       {...tailLayout}
                     >
                       <Cascader
@@ -257,9 +266,32 @@ function AtletasCreate() {
                       </Link>
                     </Form.Item>
                     <Form.Item
+                      label="Equipa"
+                      name="idteam"
+                      rules={[{ required: true }]}
+                      {...tailLayout}
+                    >
+                      <Cascader
+                        label="Equipa"
+                        options={optionsT}
+                        defaultValue={0}
+                        onChange={(value, selectedOptions) => {
+                          setidTeam(value);
+                          console.log(selectedOptions);
+                        }}
+                        placeholder="Equipa"
+                      />
+                      <Link to="/teamsCreate">
+                        <Button
+                          type="primary"
+                          icon={<PlusCircleOutlined />}
+                          size={"small"}
+                        ></Button>
+                      </Link>
+                    </Form.Item>
+                    <Form.Item
                       label="Data de Nasc.:"
                       name="BirthDate"
-                      rules={[{ required: true }]}
                       {...tailLayout}
                     >
                       <DatePicker

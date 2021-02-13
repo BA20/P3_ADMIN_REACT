@@ -14,8 +14,8 @@ const { Column, ColumnGroup } = Table;
 //  import jwt from "jwt-decode";
 const { Header, Sider, Content } = Layout;
 
-function Sets() {
-  const [sets, setsets] = useState([]);
+function Criterio() {
+  const [Criterio, setCriterio] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
 
   const deleteSet = (id) => {
@@ -33,7 +33,7 @@ function Sets() {
     Axios.get(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/SetExercise`
     ).then((response) => {
-      setsets(response.data);
+      setCriterio(response.data);
     });
   }, [ResponseStatus]);
 
@@ -98,14 +98,14 @@ function Sets() {
                     paddingRight: 0,
                   }}
                 >
-                  <Link to="/SetsCreate">
+                  <Link to="/CriterioCreate">
                     <Button
                       type="primary"
                       icon={<PlusCircleOutlined />}
                       size={"large"}
                     >
                       {" "}
-                      Criar Set{" "}
+                      Criar Crítério{" "}
                     </Button>
                   </Link>
 
@@ -120,7 +120,7 @@ function Sets() {
                     </Button>
                   </Link>
                 </div>
-                <Table dataSource={sets} size="small">
+                <Table dataSource={Criterio} size="small">
                   <ColumnGroup
                     title="idSet"
                     dataIndex="idSetExercise"
@@ -161,4 +161,4 @@ function Sets() {
   );
 }
 
-export default withRouter(Sets);
+export default withRouter(Criterio);

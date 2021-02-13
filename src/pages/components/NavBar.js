@@ -51,9 +51,14 @@ function NavBar() {
           <Link to="/sets">Sets de Exercícios</Link>
         </Menu.Item>
       </SubMenu>
-      <Menu.Item key="9" icon={<PlusCircleOutlined />} title="Outros">
-        <Link to="/outros">Outros</Link>
-      </Menu.Item>
+      <SubMenu key="sub3" icon={<BarsOutlined />} title="Outros">
+        <Menu.Item key="9" icon={<PlusCircleOutlined />} title="Outros">
+          <Link to="/criterio">Críterio</Link>
+        </Menu.Item>
+        <Menu.Item key="10" icon={<PlusCircleOutlined />} title="Outros">
+          <Link to="/gestotec">Gesto Técnico</Link>
+        </Menu.Item>
+      </SubMenu>
     </Menu>
   );
 }

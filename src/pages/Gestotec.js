@@ -14,26 +14,26 @@ const { Column, ColumnGroup } = Table;
 //  import jwt from "jwt-decode";
 const { Header, Sider, Content } = Layout;
 
-function Sets() {
-  const [sets, setsets] = useState([]);
+function GestoTec() {
+  const [GestoTec, setGestoTec] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
 
-  const deleteSet = (id) => {
+  const deleteGesto = (id) => {
     Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteSetExercise`,
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteGestoTecnico`,
       {
         id: id,
       }
     ).then((response) => {
       console.log(response);
-      setResponseStatus(`Eliminado o Exercicio ${id}`);
+      setResponseStatus(`Eliminado o Gesto Nº${id}`);
     });
   };
   useEffect(() => {
     Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/SetExercise`
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/GestoTecnico`
     ).then((response) => {
-      setsets(response.data);
+      setGestoTec(response.data);
     });
   }, [ResponseStatus]);
 
@@ -98,39 +98,33 @@ function Sets() {
                     paddingRight: 0,
                   }}
                 >
-                  <Link to="/SetsCreate">
+                  <Link to="/gestoteccreate">
                     <Button
                       type="primary"
                       icon={<PlusCircleOutlined />}
                       size={"large"}
                     >
                       {" "}
-                      Criar Set{" "}
-                    </Button>
-                  </Link>
-
-                  <Link to="/setsExerCreate" style={{ paddingRight: 0 }}>
-                    <Button
-                      type="primary"
-                      icon={<PlusCircleOutlined />}
-                      size={"large"}
-                    >
-                      {" "}
-                      Adicionar Exercícios a Set{" "}
+                      Criar Gesto Técnico{" "}
                     </Button>
                   </Link>
                 </div>
-                <Table dataSource={sets} size="small">
+                <Table dataSource={GestoTec} size="small">
                   <ColumnGroup
-                    title="idSet"
-                    dataIndex="idSetExercise"
-                    key="idSetExercise"
+                    title="idGestoTecnico"
+                    dataIndex="idGestoTecnico"
+                    key="idGestoTecnico"
                     rowSpan="5"
                   ></ColumnGroup>
                   <ColumnGroup
                     title="Nome"
-                    dataIndex="NameSet"
-                    key="NameSet"
+                    dataIndex="nomeGT"
+                    key="nomeGT"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="Descrição"
+                    dataIndex="Descrição"
+                    key="Descrição"
                   ></ColumnGroup>
 
                   <Column
@@ -142,7 +136,7 @@ function Sets() {
                         <Button>Editar</Button>
                         <Button
                           onClick={() => {
-                            deleteSet(record.idSetExercise);
+                            deleteGesto(record.idGestoTecnico);
                           }}
                         >
                           Eliminar
@@ -161,4 +155,4 @@ function Sets() {
   );
 }
 
-export default withRouter(Sets);
+export default withRouter(GestoTec);

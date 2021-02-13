@@ -31,6 +31,9 @@ import EscalaoCreate from "./pages/EscalaoCreate";
 import Sets from "./pages/Sets";
 import SetsCreate from "./pages/SetsCreate";
 import SetsExerCreate from "./pages/SetsExerCreate";
+import Criterio from "./pages/Criterio";
+import GestoTecCreate from "./pages/GestoTecCreate";
+import Gestotec from "./pages/Gestotec";
 require("dotenv").config();
 
 const layout = {
@@ -290,6 +293,21 @@ export default function App() {
       <ProtectedRoute
         path="/outros"
         component={Outros}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/criterio"
+        component={Criterio}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/gestotec"
+        component={Gestotec}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/gestoteccreate"
+        component={GestoTecCreate}
         isAuth={isAuth}
       ></ProtectedRoute>
     </Router>

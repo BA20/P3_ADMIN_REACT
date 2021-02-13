@@ -127,7 +127,7 @@ function Atletas() {
                     title="idAthlete"
                     dataIndex="idAthlete"
                     key="idAthlete"
-                    rowSpan="5"
+                    rowSpan="2"
                   ></ColumnGroup>
                   <ColumnGroup
                     title="Nome"
@@ -169,8 +169,14 @@ function Atletas() {
                     title="Data de Nascimento"
                     dataIndex="BirthDate"
                     key="BirthDate"
+                    rowSpan="5"
                   ></ColumnGroup>
-
+                  <ColumnGroup
+                    title="Equipa"
+                    dataIndex="NameT"
+                    key="NameT"
+                    rowSpan="5"
+                  ></ColumnGroup>
                   <Column
                     title="Action"
                     key="action"
