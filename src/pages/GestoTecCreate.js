@@ -109,7 +109,7 @@ function GestoTecCreate() {
             <Row>
               <Col span={8}>
                 {" "}
-                <Link to="/teams">
+                <Link to="/gestotec">
                   {" "}
                   <Button shape="circle" icon={<LeftOutlined />} />
                 </Link>
