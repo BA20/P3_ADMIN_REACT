@@ -25,6 +25,8 @@ function SetsExerCreate() {
   const [ExeSetExercise, setExeSetExercise] = useState("");
 
   const addSet_exe = () => {
+    console.log(id_exe + " exe");
+    console.log(id_set + " set");
     Axios.post(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createExeSetExercise`,
       {
@@ -34,8 +36,6 @@ function SetsExerCreate() {
     ).then((response) => {
       console.log(response);
       setResponseStatus(`Add o Exercicio ${id_exe} ao Set ${id_set}`);
-      setid_exe("");
-      setid_set("");
     });
   };
 
@@ -56,17 +56,19 @@ function SetsExerCreate() {
     ).then((response) => {
       setsets(response.data);
     });
+  }, [ResponseStatus]);
+  useEffect(() => {
     Axios.get(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/getidexe`
     ).then((response) => {
       setexe(response.data);
     });
+  }, [ResponseStatus]);
+  useEffect(() => {
     Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/ExeSetExercise`
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/getExeSetExercise`
     ).then((response) => {
       setExeSetExercise(response.data);
-      console.log(ExeSetExercise);
-      console.log("ANASDJAS");
     });
   }, [ResponseStatus]);
 
@@ -200,17 +202,17 @@ function SetsExerCreate() {
                         key="idEx_SetEx"
                         rowSpan="5"
                       ></ColumnGroup>
-
-                      <ColumnGroup
-                        title="Exercício"
-                        dataIndex="Name"
-                        key="Name"
-                      ></ColumnGroup>
                       <ColumnGroup
                         title="Set"
                         dataIndex="NameSet"
                         key="NameSet"
                       ></ColumnGroup>
+                      <ColumnGroup
+                        title="Exercício"
+                        dataIndex="Name"
+                        key="Name"
+                      ></ColumnGroup>
+
                       <Column
                         title="Action"
                         key="action"
