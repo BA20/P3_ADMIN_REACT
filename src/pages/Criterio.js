@@ -108,17 +108,6 @@ function Criterio() {
                       Criar Crítério{" "}
                     </Button>
                   </Link>
-
-                  <Link to="/setsExerCreate" style={{ paddingRight: 0 }}>
-                    <Button
-                      type="primary"
-                      icon={<PlusCircleOutlined />}
-                      size={"large"}
-                    >
-                      {" "}
-                      Adicionar Exercícios a Set{" "}
-                    </Button>
-                  </Link>
                 </div>
                 <Table dataSource={Criterio} size="small">
                   <ColumnGroup
