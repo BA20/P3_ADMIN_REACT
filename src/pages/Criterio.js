@@ -20,7 +20,7 @@ function Criterio() {
 
   const deleteSet = (id) => {
     Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteSetExercise`,
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteCriterio`,
       {
         id: id,
       }
@@ -31,7 +31,7 @@ function Criterio() {
   };
   useEffect(() => {
     Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/SetExercise`
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/Criterio`
     ).then((response) => {
       setCriterio(response.data);
     });
@@ -111,15 +111,20 @@ function Criterio() {
                 </div>
                 <Table dataSource={Criterio} size="small">
                   <ColumnGroup
-                    title="idSet"
-                    dataIndex="idSetExercise"
-                    key="idSetExercise"
+                    title="idCriterio"
+                    dataIndex="idCriterio"
+                    key="idCriterio"
                     rowSpan="5"
                   ></ColumnGroup>
                   <ColumnGroup
-                    title="Nome"
-                    dataIndex="NameSet"
-                    key="NameSet"
+                    title="descricao"
+                    dataIndex="descricao"
+                    key="descricao"
+                  ></ColumnGroup>
+                  <ColumnGroup
+                    title="NomeGesto"
+                    dataIndex="NomeGesto"
+                    key="NomeGesto"
                   ></ColumnGroup>
 
                   <Column
@@ -131,7 +136,7 @@ function Criterio() {
                         <Button>Editar</Button>
                         <Button
                           onClick={() => {
-                            deleteSet(record.idSetExercise);
+                            deleteSet(record.idCriterio);
                           }}
                         >
                           Eliminar

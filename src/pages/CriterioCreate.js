@@ -31,54 +31,32 @@ const tailLayout = {
   },
 };
 
-function CriterioCreate() {
-  const [nameAtl, setnameAtl] = useState("");
-  const [Email, setEmail] = useState("");
-  const [PhoneNumber, setPhoneNumber] = useState("");
-  const [Height, setHeight] = useState("");
-  const [Weight, setWeight] = useState("");
-  const [ArmSpan, setArmSpan] = useState("");
-  const [BirthDate, setBirthDate] = useState("");
-  const [idUser, setidUser] = useState("");
-  const [idTeam, setidTeam] = useState("");
+function GestoTecCreate() {
+  const [idGesto, setidGesto] = useState("");
+  const [Descrição, setDescrição] = useState("");
   const [options, setoptions] = useState([]);
-  
-
   const [ResponseStatus, setResponseStatus] = useState(false);
   const [MensagemStatus, setMensagemStatus] = useState([]);
+
   useEffect(() => {
     Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/getidpai`
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/Gestoidn`
     ).then((response) => {
       console.log(response.data);
       setoptions(response.data);
     });
- 
   }, []);
 
-  const addAtleta = () => {
-    if (
-      nameAtl.length <= 1 ||
-      Email.length <= 1 ||
-      idUser.length <= 0 ||
-      PhoneNumber.length <= 1
-    ) {
+  const addCriterio = () => {
+    if (Descrição.length <= 1) {
       setMensagemStatus("Campos Vazios!");
       setResponseStatus(false);
-      //setAlert(true);
     }
     Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createatleta`,
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createCriterio`,
       {
-        nameAtl: nameAtl,
-        PhoneNumber: PhoneNumber,
-        email: Email,
-        Height: Height,
-        Weight: Weight,
-        ArmSpan: ArmSpan,
-        BirthDate: BirthDate,
-        idUser: idUser,
-        idTeam: idTeam,
+        Descrição: Descrição,
+        idGesto: idGesto,
       }
     ).then((response) => {
       if (!response.data.ResponseStatus) {
@@ -140,13 +118,13 @@ function CriterioCreate() {
             <Row>
               <Col span={8}>
                 {" "}
-                <Link to="/atletas">
+                <Link to="/criterio">
                   {" "}
                   <Button shape="circle" icon={<LeftOutlined />} />
                 </Link>
               </Col>
               <Col span={8}>
-                <h1>Criar Atleta</h1>
+                <h1>Criar Crítério</h1>
               </Col>
               <Col span={8}></Col>
             </Row>
@@ -161,98 +139,33 @@ function CriterioCreate() {
                     initialValues={{
                       remember: true,
                     }}
-                    className="createUser"
+                    className="createC"
                   >
                     <Form.Item
-                      label="Nome"
-                      name="Name"
+                      label="Descrição"
+                      name="Descrição"
                       rules={[{ required: true }]}
                       {...tailLayout}
                     >
                       <Input
                         onChange={(e) => {
-                          setnameAtl(e.target.value);
-                          console.log(nameAtl);
+                          setDescrição(e.target.value);
                         }}
                       />
                     </Form.Item>
-                    <Form.Item
-                      label="Email"
-                      name="Email"
-                      rules={[{ required: true }]}
-                      {...tailLayout}
-                    >
-                      <Input
-                        onChange={(e) => {
-                          setEmail(e.target.value);
-                        }}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Telefone"
-                      name="PhoneNumber"
-                      rules={[{ required: true }]}
-                      {...tailLayout}
-                    >
-                      <Input
-                        onChange={(e) => {
-                          setPhoneNumber(e.target.value);
-                        }}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Altura"
-                      name="Height"
-                      rules={[{ required: true }]}
-                      {...tailLayout}
-                    >
-                      <Input
-                        onChange={(e) => {
-                          setHeight(e.target.value);
-                        }}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Peso"
-                      name="Weight"
-                      rules={[{ required: true }]}
-                      {...tailLayout}
-                    >
-                      <Input
-                        onChange={(e) => {
-                          setWeight(e.target.value);
-                        }}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Largura"
-                      name="ArmSpan"
-                      rules={[{ required: true }]}
-                      {...tailLayout}
-                    >
-                      <Input
-                        onChange={(e) => {
-                          setArmSpan(e.target.value);
-                        }}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Enc.Educação"
-                      name="idUser"
-                      {...tailLayout}
-                    >
+
+                    <Form.Item label="Gesto" name="idGesto" {...tailLayout}>
                       <Cascader
-                        label="Enc.Educação"
+                        label="Gesto"
                         options={options}
                         defaultValue={0}
                         onChange={(value, selectedOptions) => {
-                          setidUser(value);
+                          setidGesto(value);
                           console.log(value, selectedOptions);
-                          setidUser(value);
                         }}
-                        placeholder="Enc."
+                        placeholder=""
                       />
-                      <Link to="/usersCreate">
+                      <Link to="/gestoteccreate">
                         <Button
                           type="primary"
                           icon={<PlusCircleOutlined />}
@@ -260,48 +173,11 @@ function CriterioCreate() {
                         ></Button>
                       </Link>
                     </Form.Item>
-                    <Form.Item
-                      label="Equipa"
-                      name="idteam"
-                      rules={[{ required: true }]}
-                      {...tailLayout}
-                    >
-                      <Cascader
-                        label="Equipa"
-                        options={optionsT}
-                        defaultValue={0}
-                        onChange={(value, selectedOptions) => {
-                          setidTeam(value);
-                          console.log(selectedOptions);
-                        }}
-                        placeholder="Equipa"
-                      />
-                      <Link to="/teamsCreate">
-                        <Button
-                          type="primary"
-                          icon={<PlusCircleOutlined />}
-                          size={"small"}
-                        ></Button>
-                      </Link>
-                    </Form.Item>
-                    <Form.Item
-                      label="Data de Nasc.:"
-                      name="BirthDate"
-                      {...tailLayout}
-                    >
-                      <DatePicker
-                        placeholder="data"
-                        format={"YYYY/MM/DD"}
-                        onChange={(value) => {
-                          console.log(moment(value).format("YYYY-MM-DD"));
-                          setBirthDate(moment(value).format("YYYY-MM-DD"));
-                        }}
-                      />
-                    </Form.Item>
+
                     <Form.Item {...tailLayout}>
                       <Button
                         type="primary"
-                        onClick={addAtleta}
+                        onClick={addCriterio}
                         htmlType="submit"
                       >
                         Criar
@@ -321,4 +197,4 @@ function CriterioCreate() {
   );
 }
 
-export default withRouter(CriterioCreate);
+export default withRouter(GestoTecCreate);

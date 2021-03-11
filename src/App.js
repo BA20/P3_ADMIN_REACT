@@ -28,12 +28,11 @@ import Teams from "./pages/Teams";
 import TeamsCreate from "./pages/TeamsCreate";
 import Escalao from "./pages/Escalao";
 import EscalaoCreate from "./pages/EscalaoCreate";
-import Sets from "./pages/Sets";
-import SetsCreate from "./pages/SetsCreate";
-import SetsExerCreate from "./pages/SetsExerCreate";
+
 import Criterio from "./pages/Criterio";
 import GestoTecCreate from "./pages/GestoTecCreate";
 import Gestotec from "./pages/Gestotec";
+import CriterioCreate from "./pages/CriterioCreate";
 require("dotenv").config();
 
 const layout = {
@@ -271,21 +270,6 @@ export default function App() {
         isAuth={isAuth}
       ></ProtectedRoute>
       <ProtectedRoute
-        path="/sets"
-        component={Sets}
-        isAuth={isAuth}
-      ></ProtectedRoute>
-      <ProtectedRoute
-        path="/setsCreate"
-        component={SetsCreate}
-        isAuth={isAuth}
-      ></ProtectedRoute>
-      <ProtectedRoute
-        path="/setsExerCreate"
-        component={SetsExerCreate}
-        isAuth={isAuth}
-      ></ProtectedRoute>
-      <ProtectedRoute
         path="/exerciciosCreate"
         component={ExerciciosCreate}
         isAuth={isAuth}
@@ -298,6 +282,11 @@ export default function App() {
       <ProtectedRoute
         path="/criterio"
         component={Criterio}
+        isAuth={isAuth}
+      ></ProtectedRoute>
+      <ProtectedRoute
+        path="/CriterioCreate"
+        component={CriterioCreate}
         isAuth={isAuth}
       ></ProtectedRoute>
       <ProtectedRoute

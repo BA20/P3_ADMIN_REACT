@@ -46,7 +46,7 @@ function GestoTecCreate() {
     Axios.post(
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createGestoTecnico`,
       {
-        nomeGT: nomeGT,
+        NomeGesto: nomeGT,
         Descrição: Descrição,
       }
     ).then((response) => {

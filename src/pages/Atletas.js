@@ -135,16 +135,6 @@ function Atletas() {
                     key="NameAtl"
                   ></ColumnGroup>
                   <ColumnGroup
-                    title="Email"
-                    dataIndex="Email"
-                    key="Email"
-                  ></ColumnGroup>
-                  <ColumnGroup
-                    title="Telemóvel"
-                    dataIndex="PhoneNumber"
-                    key="PhoneNumber"
-                  ></ColumnGroup>
-                  <ColumnGroup
                     title="Enc.Educação"
                     dataIndex="Name"
                     key="Name"

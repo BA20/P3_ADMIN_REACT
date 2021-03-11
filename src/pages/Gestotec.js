@@ -111,15 +111,15 @@ function GestoTec() {
                 </div>
                 <Table dataSource={GestoTec} size="small">
                   <ColumnGroup
-                    title="idGestoTecnico"
-                    dataIndex="idGestoTecnico"
-                    key="idGestoTecnico"
+                    title="idGesto"
+                    dataIndex="idGesto"
+                    key="idGesto"
                     rowSpan="5"
                   ></ColumnGroup>
                   <ColumnGroup
                     title="Nome"
-                    dataIndex="nomeGT"
-                    key="nomeGT"
+                    dataIndex="NomeGesto"
+                    key="NomeGesto"
                   ></ColumnGroup>
                   <ColumnGroup
                     title="Descrição"
@@ -136,7 +136,7 @@ function GestoTec() {
                         <Button>Editar</Button>
                         <Button
                           onClick={() => {
-                            deleteGesto(record.idGestoTecnico);
+                            deleteGesto(record.idGesto);
                           }}
                         >
                           Eliminar

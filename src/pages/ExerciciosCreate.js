@@ -143,19 +143,6 @@ function ExerciciosCreate() {
                   >
                     <Form.Item
                       label="Nome"
-                      name="Name"
-                      rules={[{ required: true }]}
-                      {...tailLayout}
-                    >
-                      <Input
-                        onChange={(e) => {
-                          setName(e.target.value);
-                        }}
-                      />
-                    </Form.Item>
-
-                    <Form.Item
-                      label="Nome"
                       name="name"
                       rules={[{ required: true }]}
                       {...tailLayout}
@@ -179,30 +166,7 @@ function ExerciciosCreate() {
                         }}
                       />
                     </Form.Item>
-                    <Form.Item
-                      label="ObjectivoEsp"
-                      name="ObjectivoEsp"
-                      rules={[{ required: true }]}
-                      {...tailLayout}
-                    >
-                      <Input
-                        onChange={(e) => {
-                          setObjectivoEsp(e.target.value);
-                        }}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Duration"
-                      name="Duration"
-                      rules={[{ required: true }]}
-                      {...tailLayout}
-                    >
-                      <Input
-                        onChange={(e) => {
-                          setDuration(e.target.value);
-                        }}
-                      />
-                    </Form.Item>
+
                     <Form.Item
                       label="Esquema_link"
                       name="Esquema_link"

@@ -33,8 +33,6 @@ const tailLayout = {
 
 function AtletasCreate() {
   const [nameAtl, setnameAtl] = useState("");
-  const [Email, setEmail] = useState("");
-  const [PhoneNumber, setPhoneNumber] = useState("");
   const [Height, setHeight] = useState("");
   const [Weight, setWeight] = useState("");
   const [ArmSpan, setArmSpan] = useState("");
@@ -62,12 +60,7 @@ function AtletasCreate() {
   }, []);
 
   const addAtleta = () => {
-    if (
-      nameAtl.length <= 1 ||
-      Email.length <= 1 ||
-      idUser.length <= 0 ||
-      PhoneNumber.length <= 1
-    ) {
+    if (nameAtl.length <= 1 || idUser.length <= 0) {
       setMensagemStatus("Campos Vazios!");
       setResponseStatus(false);
       //setAlert(true);
@@ -76,8 +69,6 @@ function AtletasCreate() {
       `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createatleta`,
       {
         nameAtl: nameAtl,
-        PhoneNumber: PhoneNumber,
-        email: Email,
         Height: Height,
         Weight: Weight,
         ArmSpan: ArmSpan,
@@ -178,30 +169,6 @@ function AtletasCreate() {
                         onChange={(e) => {
                           setnameAtl(e.target.value);
                           console.log(nameAtl);
-                        }}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Email"
-                      name="Email"
-                      rules={[{ required: true }]}
-                      {...tailLayout}
-                    >
-                      <Input
-                        onChange={(e) => {
-                          setEmail(e.target.value);
-                        }}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Telefone"
-                      name="PhoneNumber"
-                      rules={[{ required: true }]}
-                      {...tailLayout}
-                    >
-                      <Input
-                        onChange={(e) => {
-                          setPhoneNumber(e.target.value);
                         }}
                       />
                     </Form.Item>
