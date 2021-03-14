@@ -47,15 +47,12 @@ function TreinadorCreate() {
       setResponseStatus(false);
       //setAlert(true);
     }
-    Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createUserTreinador`,
-      {
-        password: Password,
-        name: Name,
-        email: Email,
-        PhoneNumber: PhoneNumber,
-      }
-    ).then((response) => {
+    Axios.post(`http://${process.env.REACT_APP_API}/createUserTreinador`, {
+      password: Password,
+      name: Name,
+      email: Email,
+      PhoneNumber: PhoneNumber,
+    }).then((response) => {
       if (!response.data.ResponseStatus) {
         console.log(response.data);
         setMensagemStatus(response.data.mensagemStatus);

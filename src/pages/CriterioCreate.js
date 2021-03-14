@@ -39,12 +39,12 @@ function GestoTecCreate() {
   const [MensagemStatus, setMensagemStatus] = useState([]);
 
   useEffect(() => {
-    Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/Gestoidn`
-    ).then((response) => {
-      console.log(response.data);
-      setoptions(response.data);
-    });
+    Axios.get(`http://${process.env.REACT_APP_API}/Gestoidn`).then(
+      (response) => {
+        console.log(response.data);
+        setoptions(response.data);
+      }
+    );
   }, []);
 
   const addCriterio = () => {
@@ -52,13 +52,10 @@ function GestoTecCreate() {
       setMensagemStatus("Campos Vazios!");
       setResponseStatus(false);
     }
-    Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createCriterio`,
-      {
-        Descrição: Descrição,
-        idGesto: idGesto,
-      }
-    ).then((response) => {
+    Axios.post(`http://${process.env.REACT_APP_API}/createCriterio`, {
+      Descrição: Descrição,
+      idGesto: idGesto,
+    }).then((response) => {
       if (!response.data.ResponseStatus) {
         console.log(response.data);
         setMensagemStatus(response.data.mensagemStatus);

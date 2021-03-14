@@ -18,17 +18,17 @@ function Atletas() {
   const [AtletasList, setAtletasList] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
   useEffect(() => {
-    Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/atletas`
-    ).then((response) => {
-      setAtletasList(response.data);
-      console.log(response.data);
-    });
+    Axios.get(`http://${process.env.REACT_APP_API}/atletas`).then(
+      (response) => {
+        setAtletasList(response.data);
+        console.log(response.data);
+      }
+    );
   }, [ResponseStatus]);
 
   /* const updateUser = (id) => {
     Axios.put(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/`,
+      `http://${process.env.REACT_APP_API}/`,
       {
         id: id,
       }
@@ -39,12 +39,9 @@ function Atletas() {
   };*/
 
   const deleteAtleta = (id) => {
-    Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteAtleta`,
-      {
-        id: id,
-      }
-    ).then((response) => {
+    Axios.post(`http://${process.env.REACT_APP_API}/deleteAtleta`, {
+      id: id,
+    }).then((response) => {
       console.log(response);
       setResponseStatus(`Eliminado Atleta ${id}`);
     });

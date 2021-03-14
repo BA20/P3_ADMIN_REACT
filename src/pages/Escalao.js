@@ -20,7 +20,7 @@ function Escalao() {
 
   /* const updateUser = (id) => {
     Axios.put(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/`,
+      `http://${process.env.REACT_APP_API}/`,
       {
         id: id,
       }
@@ -31,23 +31,20 @@ function Escalao() {
   };*/
 
   const deleteEscalao = (id) => {
-    Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteEscalao`,
-      {
-        id: id,
-      }
-    ).then((response) => {
+    Axios.post(`http://${process.env.REACT_APP_API}/deleteEscalao`, {
+      id: id,
+    }).then((response) => {
       console.log(response);
       setResponseStatus(`Eliminado o Escalao ${id}`);
     });
   };
   useEffect(() => {
-    Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/escalao`
-    ).then((response) => {
-      console.log(response.data);
-      setEscalaoList(response.data);
-    });
+    Axios.get(`http://${process.env.REACT_APP_API}/escalao`).then(
+      (response) => {
+        console.log(response.data);
+        setEscalaoList(response.data);
+      }
+    );
   }, [ResponseStatus]);
   return (
     <div
