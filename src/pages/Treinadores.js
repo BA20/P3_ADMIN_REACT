@@ -19,34 +19,28 @@ function Treinadores() {
   const [ResponseStatus, setResponseStatus] = useState();
 
   const updateUser = (id) => {
-    Axios.put(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/`,
-      {
-        id: id,
-      }
-    ).then((response) => {
+    Axios.put(`http://${process.env.REACT_APP_API}/`, {
+      id: id,
+    }).then((response) => {
       console.log(response);
       setResponseStatus(`Editado o User ${id}`);
     });
   };
 
   const deleteUser = (id) => {
-    Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteUser`,
-      {
-        id: id,
-      }
-    ).then((response) => {
+    Axios.post(`http://${process.env.REACT_APP_API}/deleteUser`, {
+      id: id,
+    }).then((response) => {
       console.log(response);
       setResponseStatus(`Eliminado o User ${id}`);
     });
   };
   useEffect(() => {
-    Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/usersTreinador`
-    ).then((response) => {
-      setUserList(response.data);
-    });
+    Axios.get(`http://${process.env.REACT_APP_API}/usersTreinador`).then(
+      (response) => {
+        setUserList(response.data);
+      }
+    );
   }, [ResponseStatus]);
   return (
     <div

@@ -43,13 +43,10 @@ function GestoTecCreate() {
       setMensagemStatus("Campos Vazios!");
       setResponseStatus(false);
     }
-    Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createGestoTecnico`,
-      {
-        NomeGesto: nomeGT,
-        Descrição: Descrição,
-      }
-    ).then((response) => {
+    Axios.post(`http://${process.env.REACT_APP_API}/createGestoTecnico`, {
+      NomeGesto: nomeGT,
+      Descrição: Descrição,
+    }).then((response) => {
       if (!response.data.ResponseStatus) {
         console.log(response.data);
         setMensagemStatus(response.data.mensagemStatus);

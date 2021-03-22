@@ -19,22 +19,19 @@ function Exercicios() {
   const [ResponseStatus, setResponseStatus] = useState();
 
   const deleteExe = (id) => {
-    Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteExercise`,
-      {
-        id: id,
-      }
-    ).then((response) => {
+    Axios.post(`http://${process.env.REACT_APP_API}/deleteExercise`, {
+      id: id,
+    }).then((response) => {
       console.log(response);
       setResponseStatus(`Eliminado o Exercicio ${id}`);
     });
   };
   useEffect(() => {
-    Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/exercise`
-    ).then((response) => {
-      setExeList(response.data);
-    });
+    Axios.get(`http://${process.env.REACT_APP_API}/exercise`).then(
+      (response) => {
+        setExeList(response.data);
+      }
+    );
   }, [ResponseStatus]);
 
   return (

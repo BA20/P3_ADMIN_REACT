@@ -40,18 +40,18 @@ function TeamsCreate() {
   const [ResponseStatus, setResponseStatus] = useState(false);
   const [MensagemStatus, setMensagemStatus] = useState([]);
   useEffect(() => {
-    Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/getidtreinador`
-    ).then((response) => {
-      console.log(response.data);
-      setoptions(response.data);
-    });
-    Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/getidEscalao`
-    ).then((response) => {
-      console.log(response.data);
-      setoptionsE(response.data);
-    });
+    Axios.get(`http://${process.env.REACT_APP_API}/getidtreinador`).then(
+      (response) => {
+        console.log(response.data);
+        setoptions(response.data);
+      }
+    );
+    Axios.get(`http://${process.env.REACT_APP_API}/getidEscalao`).then(
+      (response) => {
+        console.log(response.data);
+        setoptionsE(response.data);
+      }
+    );
   }, []);
 
   const addTeam = () => {
@@ -59,14 +59,11 @@ function TeamsCreate() {
       setMensagemStatus("Campos Vazios!");
       setResponseStatus(false);
     }
-    Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createTeam`,
-      {
-        idEscalao_team: Escalao,
-        idtreinador: idUser,
-        NameT: NomeEquipa,
-      }
-    ).then((response) => {
+    Axios.post(`http://${process.env.REACT_APP_API}/createTeam`, {
+      idEscalao_team: Escalao,
+      idtreinador: idUser,
+      NameT: NomeEquipa,
+    }).then((response) => {
       if (!response.data.ResponseStatus) {
         console.log(response.data);
         setMensagemStatus(response.data.mensagemStatus);

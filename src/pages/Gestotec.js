@@ -19,22 +19,19 @@ function GestoTec() {
   const [ResponseStatus, setResponseStatus] = useState();
 
   const deleteGesto = (id) => {
-    Axios.post(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteGestoTecnico`,
-      {
-        id: id,
-      }
-    ).then((response) => {
+    Axios.post(`http://${process.env.REACT_APP_API}/deleteGestoTecnico`, {
+      id: id,
+    }).then((response) => {
       console.log(response);
       setResponseStatus(`Eliminado o Gesto Nº${id}`);
     });
   };
   useEffect(() => {
-    Axios.get(
-      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/GestoTecnico`
-    ).then((response) => {
-      setGestoTec(response.data);
-    });
+    Axios.get(`http://${process.env.REACT_APP_API}/GestoTecnico`).then(
+      (response) => {
+        setGestoTec(response.data);
+      }
+    );
   }, [ResponseStatus]);
 
   return (
