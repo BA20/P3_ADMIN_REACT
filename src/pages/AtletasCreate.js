@@ -45,18 +45,18 @@ function AtletasCreate() {
   const [ResponseStatus, setResponseStatus] = useState(false);
   const [MensagemStatus, setMensagemStatus] = useState([]);
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/getidpai`).then(
-      (response) => {
-        console.log(response.data);
-        setoptions(response.data);
-      }
-    );
-    Axios.get(`http://${process.env.REACT_APP_API}/getidteams`).then(
-      (response) => {
-        console.log(response.data);
-        setoptionsT(response.data);
-      }
-    );
+    Axios.get(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/getidpai`
+    ).then((response) => {
+      console.log(response.data);
+      setoptions(response.data);
+    });
+    Axios.get(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/getidteams`
+    ).then((response) => {
+      console.log(response.data);
+      setoptionsT(response.data);
+    });
   }, []);
 
   const addAtleta = () => {
@@ -65,15 +65,18 @@ function AtletasCreate() {
       setResponseStatus(false);
       //setAlert(true);
     }
-    Axios.post(`http://${process.env.REACT_APP_API}/createatleta`, {
-      nameAtl: nameAtl,
-      Height: Height,
-      Weight: Weight,
-      ArmSpan: ArmSpan,
-      BirthDate: BirthDate,
-      idUser: idUser,
-      idTeam: idTeam,
-    }).then((response) => {
+    Axios.post(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createatleta`,
+      {
+        nameAtl: nameAtl,
+        Height: Height,
+        Weight: Weight,
+        ArmSpan: ArmSpan,
+        BirthDate: BirthDate,
+        idUser: idUser,
+        idTeam: idTeam,
+      }
+    ).then((response) => {
       if (!response.data.ResponseStatus) {
         console.log(response.data);
         setMensagemStatus(response.data.mensagemStatus);

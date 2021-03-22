@@ -1,7 +1,7 @@
 {
   "name": "admin12",
   "version": "0.1.0",
-  "homepage": "http://volley.sarapaiva.webtuga.net/",
+  "homepage": "http://sarapaiva.webtuga.net",
   "private": true,
   "dependencies": {
     "@devexpress/dx-react-core": "^2.7.4",

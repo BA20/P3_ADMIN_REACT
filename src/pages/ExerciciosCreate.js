@@ -49,13 +49,16 @@ function ExerciciosCreate() {
       setResponseStatus(false);
       //setAlert(true);
     }
-    Axios.post(`http://${process.env.REACT_APP_API}/createExercise`, {
-      Descrição: Descrição,
-      Name: Name,
-      ObjectivoEsp: ObjectivoEsp,
-      Duration: Duration,
-      Esquema_link: Esquema_link,
-    }).then((response) => {
+    Axios.post(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/createExercise`,
+      {
+        Descrição: Descrição,
+        Name: Name,
+        ObjectivoEsp: ObjectivoEsp,
+        Duration: Duration,
+        Esquema_link: Esquema_link,
+      }
+    ).then((response) => {
       if (!response.data.ResponseStatus) {
         console.log(response.data);
         setMensagemStatus(response.data.mensagemStatus);

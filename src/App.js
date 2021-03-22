@@ -68,11 +68,14 @@ export default function App() {
       setLoginStatus("Campos Vazios!");
       //setAlert(true);
     } else {
-      Axios.post(`http://${process.env.REACT_APP_API}/login`, {
-        //Axios.post(`process.env.REACT_APP_API`, {
-        username: username,
-        password: password,
-      }).then((response) => {
+      Axios.post(
+        `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/login`,
+        {
+          //Axios.post(`http://localhost:5050/login`, {
+          username: username,
+          password: password,
+        }
+      ).then((response) => {
         if (!response.data.auth) {
           setLoginStatus(response.data.message);
           // setAlert(true);

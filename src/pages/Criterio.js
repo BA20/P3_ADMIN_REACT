@@ -19,19 +19,22 @@ function Criterio() {
   const [ResponseStatus, setResponseStatus] = useState();
 
   const deleteSet = (id) => {
-    Axios.post(`http://${process.env.REACT_APP_API}/deleteCriterio`, {
-      id: id,
-    }).then((response) => {
+    Axios.post(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteCriterio`,
+      {
+        id: id,
+      }
+    ).then((response) => {
       console.log(response);
       setResponseStatus(`Eliminado o Exercicio ${id}`);
     });
   };
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/Criterio`).then(
-      (response) => {
-        setCriterio(response.data);
-      }
-    );
+    Axios.get(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/Criterio`
+    ).then((response) => {
+      setCriterio(response.data);
+    });
   }, [ResponseStatus]);
 
   return (

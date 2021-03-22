@@ -19,19 +19,22 @@ function Avaliacao() {
   const [ResponseStatus, setResponseStatus] = useState();
 
   const deleteAvaliacao = (id) => {
-    Axios.post(`http://${process.env.REACT_APP_API}/deleteavaliacao`, {
-      id: id,
-    }).then((response) => {
+    Axios.post(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteavaliacao`,
+      {
+        id: id,
+      }
+    ).then((response) => {
       console.log(response);
       setResponseStatus(`Eliminado o avaliação ${id}`);
     });
   };
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/Avaliacao`).then(
-      (response) => {
-        setAvaliacao(response.data);
-      }
-    );
+    Axios.get(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/Avaliacao`
+    ).then((response) => {
+      setAvaliacao(response.data);
+    });
   }, [ResponseStatus]);
 
   return (

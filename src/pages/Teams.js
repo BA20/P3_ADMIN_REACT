@@ -20,7 +20,7 @@ function Teams() {
 
   /* const updateUser = (id) => {
     Axios.put(
-      `http://${process.env.REACT_APP_API}/`,
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/`,
       {
         id: id,
       }
@@ -31,15 +31,20 @@ function Teams() {
   };*/
 
   const deleteTeams = (id) => {
-    Axios.post(`http://${process.env.REACT_APP_API}/deleteTeam`, {
-      id: id,
-    }).then((response) => {
+    Axios.post(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/deleteTeam`,
+      {
+        id: id,
+      }
+    ).then((response) => {
       console.log(response);
       setResponseStatus(`Eliminado o User ${id}`);
     });
   };
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/teams`).then((response) => {
+    Axios.get(
+      `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/teams`
+    ).then((response) => {
       console.log(response.data);
       setTeamsList(response.data);
     });
