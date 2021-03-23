@@ -41,7 +41,7 @@ function EscalaoCreate() {
       setResponseStatus(false);
       //setAlert(true);
     }
-    Axios.post(`http://${process.env.REACT_APP_API}/createEscalao`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/createEscalao`, {
       Descricao: Descricao,
       NameEs: NameEs,
     }).then((response) => {

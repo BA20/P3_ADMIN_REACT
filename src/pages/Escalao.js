@@ -20,7 +20,7 @@ function Escalao() {
 
   /* const updateUser = (id) => {
     Axios.put(
-      `http://${process.env.REACT_APP_API}/`,
+      `http://volleyapi.sarapaiva.webtuga.net/`,
       {
         id: id,
       }
@@ -31,7 +31,7 @@ function Escalao() {
   };*/
 
   const deleteEscalao = (id) => {
-    Axios.post(`http://${process.env.REACT_APP_API}/deleteEscalao`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/deleteEscalao`, {
       id: id,
     }).then((response) => {
       console.log(response);
@@ -39,7 +39,7 @@ function Escalao() {
     });
   };
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/escalao`).then(
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/escalao`).then(
       (response) => {
         console.log(response.data);
         setEscalaoList(response.data);

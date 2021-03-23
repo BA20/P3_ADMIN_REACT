@@ -19,7 +19,7 @@ function Exercicios() {
   const [ResponseStatus, setResponseStatus] = useState();
 
   const deleteExe = (id) => {
-    Axios.post(`http://${process.env.REACT_APP_API}/deleteExercise`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/deleteExercise`, {
       id: id,
     }).then((response) => {
       console.log(response);
@@ -27,7 +27,7 @@ function Exercicios() {
     });
   };
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/exercise`).then(
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/exercise`).then(
       (response) => {
         setExeList(response.data);
       }

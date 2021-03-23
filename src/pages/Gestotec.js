@@ -19,7 +19,7 @@ function GestoTec() {
   const [ResponseStatus, setResponseStatus] = useState();
 
   const deleteGesto = (id) => {
-    Axios.post(`http://${process.env.REACT_APP_API}/deleteGestoTecnico`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/deleteGestoTecnico`, {
       id: id,
     }).then((response) => {
       console.log(response);
@@ -27,7 +27,7 @@ function GestoTec() {
     });
   };
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/GestoTecnico`).then(
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/GestoTecnico`).then(
       (response) => {
         setGestoTec(response.data);
       }

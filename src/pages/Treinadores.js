@@ -19,7 +19,7 @@ function Treinadores() {
   const [ResponseStatus, setResponseStatus] = useState();
 
   const updateUser = (id) => {
-    Axios.put(`http://${process.env.REACT_APP_API}/`, {
+    Axios.put(`http://volleyapi.sarapaiva.webtuga.net/`, {
       id: id,
     }).then((response) => {
       console.log(response);
@@ -28,7 +28,7 @@ function Treinadores() {
   };
 
   const deleteUser = (id) => {
-    Axios.post(`http://${process.env.REACT_APP_API}/deleteUser`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/deleteUser`, {
       id: id,
     }).then((response) => {
       console.log(response);
@@ -36,7 +36,7 @@ function Treinadores() {
     });
   };
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/usersTreinador`).then(
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/usersTreinador`).then(
       (response) => {
         setUserList(response.data);
       }

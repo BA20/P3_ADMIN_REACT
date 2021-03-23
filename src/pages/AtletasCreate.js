@@ -45,13 +45,13 @@ function AtletasCreate() {
   const [ResponseStatus, setResponseStatus] = useState(false);
   const [MensagemStatus, setMensagemStatus] = useState([]);
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/getidpai`).then(
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/getidpai`).then(
       (response) => {
         console.log(response.data);
         setoptions(response.data);
       }
     );
-    Axios.get(`http://${process.env.REACT_APP_API}/getidteams`).then(
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/getidteams`).then(
       (response) => {
         console.log(response.data);
         setoptionsT(response.data);
@@ -65,7 +65,7 @@ function AtletasCreate() {
       setResponseStatus(false);
       //setAlert(true);
     }
-    Axios.post(`http://${process.env.REACT_APP_API}/createatleta`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/createatleta`, {
       nameAtl: nameAtl,
       Height: Height,
       Weight: Weight,

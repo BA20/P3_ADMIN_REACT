@@ -40,13 +40,13 @@ function TeamsCreate() {
   const [ResponseStatus, setResponseStatus] = useState(false);
   const [MensagemStatus, setMensagemStatus] = useState([]);
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/getidtreinador`).then(
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/getidtreinador`).then(
       (response) => {
         console.log(response.data);
         setoptions(response.data);
       }
     );
-    Axios.get(`http://${process.env.REACT_APP_API}/getidEscalao`).then(
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/getidEscalao`).then(
       (response) => {
         console.log(response.data);
         setoptionsE(response.data);
@@ -59,7 +59,7 @@ function TeamsCreate() {
       setMensagemStatus("Campos Vazios!");
       setResponseStatus(false);
     }
-    Axios.post(`http://${process.env.REACT_APP_API}/createTeam`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/createTeam`, {
       idEscalao_team: Escalao,
       idtreinador: idUser,
       NameT: NomeEquipa,

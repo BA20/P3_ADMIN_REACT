@@ -19,7 +19,7 @@ function Criterio() {
   const [ResponseStatus, setResponseStatus] = useState();
 
   const deleteSet = (id) => {
-    Axios.post(`http://${process.env.REACT_APP_API}/deleteCriterio`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/deleteCriterio`, {
       id: id,
     }).then((response) => {
       console.log(response);
@@ -27,7 +27,7 @@ function Criterio() {
     });
   };
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/Criterio`).then(
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/Criterio`).then(
       (response) => {
         setCriterio(response.data);
       }

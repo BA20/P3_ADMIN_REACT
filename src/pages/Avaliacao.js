@@ -19,7 +19,7 @@ function Avaliacao() {
   const [ResponseStatus, setResponseStatus] = useState();
 
   const deleteAvaliacao = (id) => {
-    Axios.post(`http://${process.env.REACT_APP_API}/deleteavaliacao`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/deleteavaliacao`, {
       id: id,
     }).then((response) => {
       console.log(response);
@@ -27,7 +27,7 @@ function Avaliacao() {
     });
   };
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/Avaliacao`).then(
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/Avaliacao`).then(
       (response) => {
         setAvaliacao(response.data);
       }

@@ -20,7 +20,7 @@ function Teams() {
 
   /* const updateUser = (id) => {
     Axios.put(
-      `http://${process.env.REACT_APP_API}/`,
+      `http://volleyapi.sarapaiva.webtuga.net/`,
       {
         id: id,
       }
@@ -31,7 +31,7 @@ function Teams() {
   };*/
 
   const deleteTeams = (id) => {
-    Axios.post(`http://${process.env.REACT_APP_API}/deleteTeam`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/deleteTeam`, {
       id: id,
     }).then((response) => {
       console.log(response);
@@ -39,10 +39,12 @@ function Teams() {
     });
   };
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/teams`).then((response) => {
-      console.log(response.data);
-      setTeamsList(response.data);
-    });
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/teams`).then(
+      (response) => {
+        console.log(response.data);
+        setTeamsList(response.data);
+      }
+    );
   }, [ResponseStatus]);
   return (
     <div

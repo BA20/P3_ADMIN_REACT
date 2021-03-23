@@ -18,7 +18,7 @@ function Atletas() {
   const [AtletasList, setAtletasList] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/atletas`).then(
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/atletas`).then(
       (response) => {
         setAtletasList(response.data);
         console.log(response.data);
@@ -28,7 +28,7 @@ function Atletas() {
 
   /* const updateUser = (id) => {
     Axios.put(
-      `http://${process.env.REACT_APP_API}/`,
+      `http://volleyapi.sarapaiva.webtuga.net/`,
       {
         id: id,
       }
@@ -39,7 +39,7 @@ function Atletas() {
   };*/
 
   const deleteAtleta = (id) => {
-    Axios.post(`http://${process.env.REACT_APP_API}/deleteAtleta`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/deleteAtleta`, {
       id: id,
     }).then((response) => {
       console.log(response);

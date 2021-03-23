@@ -68,7 +68,7 @@ export default function App() {
       setLoginStatus("Campos Vazios!");
       //setAlert(true);
     } else {
-      Axios.post(`http://${process.env.REACT_APP_API}/login`, {
+      Axios.post(`http://volleyapi.sarapaiva.webtuga.net/login`, {
         //Axios.post(`process.env.REACT_APP_API`, {
         username: username,
         password: password,

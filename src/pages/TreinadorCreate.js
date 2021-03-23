@@ -47,7 +47,7 @@ function TreinadorCreate() {
       setResponseStatus(false);
       //setAlert(true);
     }
-    Axios.post(`http://${process.env.REACT_APP_API}/createUserTreinador`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/createUserTreinador`, {
       password: Password,
       name: Name,
       email: Email,

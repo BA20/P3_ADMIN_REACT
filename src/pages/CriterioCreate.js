@@ -39,7 +39,7 @@ function GestoTecCreate() {
   const [MensagemStatus, setMensagemStatus] = useState([]);
 
   useEffect(() => {
-    Axios.get(`http://${process.env.REACT_APP_API}/Gestoidn`).then(
+    Axios.get(`http://volleyapi.sarapaiva.webtuga.net/Gestoidn`).then(
       (response) => {
         console.log(response.data);
         setoptions(response.data);
@@ -52,7 +52,7 @@ function GestoTecCreate() {
       setMensagemStatus("Campos Vazios!");
       setResponseStatus(false);
     }
-    Axios.post(`http://${process.env.REACT_APP_API}/createCriterio`, {
+    Axios.post(`http://volleyapi.sarapaiva.webtuga.net/createCriterio`, {
       Descrição: Descrição,
       idGesto: idGesto,
     }).then((response) => {
