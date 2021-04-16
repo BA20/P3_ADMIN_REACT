@@ -1,6 +1,7 @@
 {
   "name": "admin12",
   "version": "0.1.0",
+  "proxy": "http://volleyapi.sarapaiva.webtuga.net",
   "homepage": "http://volley.sarapaiva.webtuga.net/",
   "private": true,
   "dependencies": {

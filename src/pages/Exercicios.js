@@ -108,35 +108,21 @@ function Exercicios() {
                 </div>
                 <Table dataSource={ExeList} size="small">
                   <ColumnGroup
-                    title="idExercise"
-                    dataIndex="idExercise"
-                    key="idExercise"
+                    title="idExercicio"
+                    dataIndex="idExercicio"
+                    key="idExercicio"
                     rowSpan="5"
                   ></ColumnGroup>
+
                   <ColumnGroup
                     title="Nome"
-                    dataIndex="Name"
-                    key="Name"
+                    dataIndex="Nome"
+                    key="exnome"
                   ></ColumnGroup>
                   <ColumnGroup
                     title="Descrição"
                     dataIndex="Descrição"
-                    key="Descrição"
-                  ></ColumnGroup>
-                  <ColumnGroup
-                    title="ObjectivoEsp"
-                    dataIndex="ObjectivoEsp"
-                    key="ObjectivoEsp"
-                  ></ColumnGroup>
-                  <ColumnGroup
-                    title="Duration"
-                    dataIndex="Duration"
-                    key="Duration"
-                  ></ColumnGroup>
-                  <ColumnGroup
-                    title="Esquema_link"
-                    dataIndex="Esquema_link"
-                    key="Esquema_link"
+                    key="exdescricao"
                   ></ColumnGroup>
 
                   <Column
