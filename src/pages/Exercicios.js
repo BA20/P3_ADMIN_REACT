@@ -134,7 +134,7 @@ function Exercicios() {
                         <Button>Editar</Button>
                         <Button
                           onClick={() => {
-                            deleteExe(record.idUser);
+                            deleteExe(record.idExercicio);
                           }}
                         >
                           Eliminar

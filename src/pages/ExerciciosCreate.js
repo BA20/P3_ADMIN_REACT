@@ -38,13 +38,7 @@ function ExerciciosCreate() {
   const [MensagemStatus, setMensagemStatus] = useState([]);
 
   const addExe = () => {
-    if (
-      Descrição.length <= 1 ||
-      Name.length <= 1 ||
-      Esquema_link.length <= 1 ||
-      ObjectivoEsp.length <= 1 ||
-      Duration.length <= 1
-    ) {
+    if (Descrição.length <= 1 || Esquema_link.length <= 1 || Nome.length <= 1) {
       setMensagemStatus("Campos Vazios!");
       setResponseStatus(false);
       //setAlert(true);
