@@ -94,18 +94,7 @@ function Exercicios() {
                     display: "flex",
                     paddingRight: 0,
                   }}
-                >
-                  <Link to="/exerciciosCreate">
-                    <Button
-                      type="primary"
-                      icon={<PlusCircleOutlined />}
-                      size={"large"}
-                    >
-                      {" "}
-                      Criar Exercício{" "}
-                    </Button>
-                  </Link>
-                </div>
+                ></div>
                 <Table dataSource={ExeList} size="small">
                   <ColumnGroup
                     title="idExercicio"
@@ -131,7 +120,6 @@ function Exercicios() {
                     fixed="right"
                     render={(text, record) => (
                       <Space size="middle">
-                        <Button>Editar</Button>
                         <Button
                           onClick={() => {
                             deleteExe(record.idExercicio);

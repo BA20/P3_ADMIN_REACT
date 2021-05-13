@@ -4,7 +4,6 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { AppBar, Toolbar, makeStyles } from "@material-ui/core";
 import Image from "react-bootstrap/Image";
-import logo from "./images/logovcvPeq.png";
 
 const useStyles = makeStyles({
   root: {},
@@ -24,13 +23,6 @@ const TopBar = ({ className, ...rest }) => {
           backgroundColor: "#a21c1e",
         }}
       >
-        <Image
-          src={logo}
-          roundedCircle
-          style={{
-            padding: "20px",
-          }}
-        />
         <RouterLink to="/home"></RouterLink>
       </Toolbar>
     </AppBar>

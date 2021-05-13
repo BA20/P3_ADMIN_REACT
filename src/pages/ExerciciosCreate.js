@@ -31,14 +31,12 @@ const tailLayout = {
 function ExerciciosCreate() {
   const [Descrição, setDescrição] = useState("");
   const [Name, setName] = useState("");
-  const [ObjectivoEsp, setObjectivoEsp] = useState("");
-  const [Duration, setDuration] = useState("");
   const [Esquema_link, setEsquema_link] = useState("");
   const [ResponseStatus, setResponseStatus] = useState(false);
   const [MensagemStatus, setMensagemStatus] = useState([]);
 
   const addExe = () => {
-    if (Descrição.length <= 1 || Esquema_link.length <= 1 || Nome.length <= 1) {
+    if (Descrição.length <= 1 || Esquema_link.length <= 1 || Name.length <= 1) {
       setMensagemStatus("Campos Vazios!");
       setResponseStatus(false);
       //setAlert(true);
@@ -46,8 +44,6 @@ function ExerciciosCreate() {
     Axios.post(`http://volleyapi.sarapaiva.webtuga.net/createExercise`, {
       Descrição: Descrição,
       Name: Name,
-      ObjectivoEsp: ObjectivoEsp,
-      Duration: Duration,
       Esquema_link: Esquema_link,
     }).then((response) => {
       if (!response.data.ResponseStatus) {

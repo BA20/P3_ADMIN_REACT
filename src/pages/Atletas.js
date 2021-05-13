@@ -170,7 +170,6 @@ function Atletas() {
                     fixed="right"
                     render={(text, record) => (
                       <Space size="middle">
-                        <Button>Editar</Button>
                         <Button
                           onClick={() => {
                             deleteAtleta(record.idAthlete);

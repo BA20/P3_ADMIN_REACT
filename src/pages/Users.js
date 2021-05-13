@@ -145,7 +145,6 @@ function Users() {
                     fixed="right"
                     render={(text, record) => (
                       <Space size="middle">
-                        <Button>Editar</Button>
                         <Button
                           onClick={() => {
                             deleteUser(record.idUser);

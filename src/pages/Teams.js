@@ -146,10 +146,9 @@ function Teams() {
                     fixed="right"
                     render={(text, record) => (
                       <Space size="middle">
-                        <Button>Editar</Button>
                         <Button
                           onClick={() => {
-                            deleteTeams(record.idUser);
+                            deleteTeams(record.idTeam);
                           }}
                         >
                           Eliminar

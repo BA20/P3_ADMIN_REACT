@@ -141,10 +141,9 @@ function Escalao() {
                     fixed="right"
                     render={(text, record) => (
                       <Space size="middle">
-                        <Button>Editar</Button>
                         <Button
                           onClick={() => {
-                            deleteEscalao(record.idUser);
+                            deleteEscalao(record.idEscalao);
                           }}
                         >
                           Eliminar

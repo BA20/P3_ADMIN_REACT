@@ -130,7 +130,6 @@ function Criterio() {
                     fixed="right"
                     render={(text, record) => (
                       <Space size="middle">
-                        <Button>Editar</Button>
                         <Button
                           onClick={() => {
                             deleteSet(record.idCriterio);
