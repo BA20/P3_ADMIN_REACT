@@ -1,9 +1,10 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
 import { Layout } from "antd";
-import TopBar from "./components/TopBar";
 import NavBar from "./components/NavBar";
+import React from "react";
+import TopBar from "./components/TopBar";
 import background from "./components/images/background-login.jpg";
+import { withRouter } from "react-router-dom";
+
 //import Axios from "axios";
 
 //  import jwt from "jwt-decode";
