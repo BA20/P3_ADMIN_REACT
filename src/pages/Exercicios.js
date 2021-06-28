@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Button, Space, Table } from "antd";
+import { Link, withRouter } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
-import { Layout } from "antd";
-import TopBar from "./components/TopBar";
-import NavBar from "./components/NavBar";
-import background from "./components/images/background-login.jpg";
 import Axios from "axios";
+import { Layout } from "antd";
+import NavBar from "./components/NavBar";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { Table, Space, Button } from "antd";
+import TopBar from "./components/TopBar";
+import background from "./components/images/background-login.jpg";
 
 const { Column, ColumnGroup } = Table;
 
@@ -105,12 +105,12 @@ function Exercicios() {
 
                   <ColumnGroup
                     title="Nome"
-                    dataIndex="Nome"
+                    dataIndex="exnome"
                     key="exnome"
                   ></ColumnGroup>
                   <ColumnGroup
                     title="Descrição"
-                    dataIndex="Descrição"
+                    dataIndex="exdescricao"
                     key="exdescricao"
                   ></ColumnGroup>
 
