@@ -51,9 +51,7 @@ function Home() {
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
             }}
-          >
-            <h1>HOME</h1>
-          </Content>
+          ></Content>
         </Layout>
       </Layout>
     </div>
