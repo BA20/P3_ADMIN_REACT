@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import TopBar from "./components/TopBar";
 import background from "./components/images/background-login.jpg";
+import moment from "moment";
 
 const { Column, ColumnGroup } = Table;
 
@@ -17,10 +18,17 @@ const { Header, Sider, Content } = Layout;
 function Atletas() {
   const [AtletasList, setAtletasList] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
+
   useEffect(() => {
     Axios.get(`http://volleyapi.sarapaiva.webtuga.net/atletas`).then(
       (response) => {
-        setAtletasList(response.data);
+        let atletas = response.data;
+        atletas.map((el) => {
+          let BirthDate = moment(new Date(el.BirthDate));
+          el.BirthDate = BirthDate.format("DD/MM/YYYY");
+        });
+
+        setAtletasList(atletas);
         console.log(response.data);
       }
     );
@@ -165,7 +173,7 @@ function Atletas() {
                     rowSpan="5"
                   ></ColumnGroup>
                   <Column
-                    title="Action"
+                    title=""
                     key="action"
                     fixed="right"
                     render={(text, record) => (

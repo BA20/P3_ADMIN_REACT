@@ -140,7 +140,7 @@ function Users() {
                   ></ColumnGroup>
 
                   <Column
-                    title="Action"
+                    title=""
                     key="action"
                     fixed="right"
                     render={(text, record) => (

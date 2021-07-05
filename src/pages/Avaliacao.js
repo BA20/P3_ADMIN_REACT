@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import TopBar from "./components/TopBar";
 import background from "./components/images/background-login.jpg";
+import moment from "moment";
 
 const { Column, ColumnGroup } = Table;
 
@@ -17,7 +18,6 @@ const { Header, Sider, Content } = Layout;
 function Avaliacao() {
   const [Avaliacao, setAvaliacao] = useState([]);
   const [ResponseStatus, setResponseStatus] = useState();
-
   const deleteAvaliacao = (id) => {
     Axios.post(`http://volleyapi.sarapaiva.webtuga.net/deleteavaliacao`, {
       id: id,
@@ -29,7 +29,13 @@ function Avaliacao() {
   useEffect(() => {
     Axios.get(`http://volleyapi.sarapaiva.webtuga.net/avaliacao`).then(
       (response) => {
-        setAvaliacao(response.data);
+        let ava = response.data;
+        ava.map((el) => {
+          let date = moment.unix(new Date(el.date));
+          el.date = date.format("DD/MM/YYYY");
+        });
+
+        setAvaliacao(ava);
       }
     );
   }, [ResponseStatus]);
@@ -112,9 +118,14 @@ function Avaliacao() {
                     dataIndex="Score"
                     key="Score"
                   ></ColumnGroup>
+                  <ColumnGroup
+                    title="Data"
+                    dataIndex="date"
+                    key="date"
+                  ></ColumnGroup>
 
                   <Column
-                    title="Action"
+                    title=""
                     key="action"
                     fixed="right"
                     render={(text, record) => (
